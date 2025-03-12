@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>종합 상식 퀴즈</title>
+  <link rel="stylesheet" href="styles.css">
+  <!-- Google Fonts: Roboto -->
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <!-- 카테고리 선택 화면 -->
+  <div id="categoryContainer" class="container">
+    <header>
+      <h1>종합 상식 퀴즈</h1>
+      <p>카테고리를 선택하여 도전해보세요!</p>
+    </header>
+    <section id="categories">
+      <button class="cat-btn" data-cat="history">역사</button>
+      <button class="cat-btn" data-cat="it">IT</button>
+      <button class="cat-btn" data-cat="sports">스포츠</button>
+      <button class="cat-btn" data-cat="personality">인물</button>
+    </section>
+  </div>
+
+  <!-- 퀴즈 진행 화면 -->
+  <div id="quizContainer" class="container" style="display:none;">
+    <header>
+      <h1 id="quizTitle"></h1>
+    </header>
+    <section class="quiz">
+      <div id="question" class="question">문제가 여기에 표시됩니다.</div>
+      <ul id="options" class="options">
+        <!-- 옵션 버튼들이 동적으로 생성됩니다. -->
+      </ul>
+      <div id="result" class="result"></div>
+    </section>
+    <footer>
+      <button id="nextBtn" class="action-btn">다음 문제</button>
+      <button id="menuBtn" class="action-btn" style="display:none;">메인 메뉴로 돌아가기</button>
+    </footer>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
