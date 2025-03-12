@@ -49,8 +49,7 @@ const quizData = {
       }
     ]
   };
-  document.cookie = "user=admin; Secure; HttpOnly; SameSite=Strict";
-
+  
   // 카테고리 키와 표시할 이름을 매핑하는 객체
   const categoryNames = {
     history: "역사",
