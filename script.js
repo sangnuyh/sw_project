@@ -11,7 +11,7 @@ const quizData = {
       question: "대한민국 임시정부가 수립된 해는?",
       options: ["1919", "1945", "1931", "1950"],
       answer: "1919",
-      difficulty: "medium"
+      difficulty: "hard"
     },
     {
       question: "고려와 친교를 맺고 사이좋게 지냈던 나라는?",
