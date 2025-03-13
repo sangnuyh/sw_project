@@ -21,7 +21,7 @@ const quizData = {
     },
     {
       question: "test",
-      options: ["t", "e", "ss", "정답답"],
+      options: ["t", "e", "ss", "정답"],
       answer: "정답",
       difficulty: "hard"
     }
@@ -75,13 +75,13 @@ const quizData = {
     },
     {
       question: "대한민국 최초의 여성 대통령은?",
-      options: ["박근혜", "문재인", "이낙연", "없음"],
+      options: ["박근혜", "문제인", "이낙연", "없음"],
       answer: "없음",
       difficulty: "medium"
     },
     {
       question: "대한민국 최초의 여성 대통령은?",
-      options: ["박근혜", "문재인", "이낙연", "없음"],
+      options: ["박근혜", "문제인", "이낙연", "없음"],
       answer: "없음",
       difficulty: "hard"
     }
@@ -130,7 +130,7 @@ document.querySelectorAll('.difficulty-btn').forEach(btn => {
     currentDifficulty = btn.getAttribute('data-difficulty');
     difficultyContainer.style.display = 'none';
     quizContainer.style.display = 'block';
-    quizTitle.innerText = `${categoryNames[currentCategory]} (${getDifficultyText(currentDifficulty)}) 퀴즈`;
+    quizTitle.innerText = `${categoryNames[currentCategory]} 퀴즈  (${getDifficultyText(currentDifficulty)})`;
     // 선택된 난이도에 해당하는 문제만 필터링하여 currentQuizData에 저장
     currentQuizData = shuffleArray(
       quizData[currentCategory].filter(q => q.difficulty === currentDifficulty)
@@ -143,9 +143,9 @@ document.querySelectorAll('.difficulty-btn').forEach(btn => {
 
 // 난이도 텍스트 반환 함수
 function getDifficultyText(diff) {
-  if (diff === 'easy') return "쉬움";
-  if (diff === 'medium') return "보통";
-  if (diff === 'hard') return "어려움";
+  if (diff === 'easy') return "이지";
+  if (diff === 'medium') return "노말";
+  if (diff === 'hard') return "하드";
   return "";
 }
 
@@ -210,7 +210,7 @@ nextBtn.addEventListener('click', () => {
 function showFinalResult() {
   clearState();
   questionEl.innerText = "";
-  resultEl.innerText = `훌륭해요! ${categoryNames[currentCategory]} (${getDifficultyText(currentDifficulty)}) 퀴즈에서 총 ${currentQuizData.length}문제 중 ${score}문제를 맞추셨어요. 계속 도전해보세요!`;
+  resultEl.innerText = `훌륭해요! ${categoryNames[currentCategory]} 퀴즈 (${getDifficultyText(currentDifficulty)}) 에서 총 ${currentQuizData.length}문제 중 ${score}문제를 맞추셨어요. \n 계속 도전해보세요!`;
   nextBtn.style.display = "none";
   menuBtn.style.display = "block";
 }

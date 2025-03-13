@@ -3,10 +3,17 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: 'BMJUA';
+}
+
+@font-face {
+  font-family: 'BMJUA';
+  src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/BMJUA.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
 }
 
 body {
-  font-family: 'Roboto', sans-serif;
   background: linear-gradient(135deg, #74ebd5, #ACB6E5);
   min-height: 100vh;
   display: flex;
