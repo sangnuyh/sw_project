@@ -36,7 +36,7 @@ const quizData = {
         answer: "브라질"
       }
     ],
-    personality: [
+    commonSense: [
       {
         question: "세계적인 음악 프로듀서 퀸시 존스의 국적은?",
         options: ["미국", "영국", "캐나다", "호주"],
@@ -55,7 +55,7 @@ const quizData = {
     history: "역사",
     it: "IT",
     sports: "스포츠",
-    personality: "인물"
+    commonSense: "상식"
   };
   
   let currentQuizData = [];
