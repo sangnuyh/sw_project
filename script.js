@@ -1,51 +1,59 @@
-// 퀴즈 데이터 (예시)
+// 퀴즈 데이터에 각 문제의 난이도를 추가합니다.
 const quizData = {
   history: [
     {
       question: "조선의 창업자는 누구인가?",
       options: ["이성계", "세종대왕", "태조", "광해군"],
-      answer: "태조"
+      answer: "태조",
+      difficulty: "easy"
     },
     {
       question: "대한민국 임시정부가 수립된 해는?",
       options: ["1919", "1945", "1931", "1950"],
-      answer: "1919"
+      answer: "1919",
+      difficulty: "medium"
     }
   ],
   it: [
     {
       question: "HTML의 약자는 무엇일까요?",
       options: ["HyperText Markup Language", "HighText Machine Language", "Hyperlink Markup Language", "Hyper Transfer Markup Language"],
-      answer: "HyperText Markup Language"
+      answer: "HyperText Markup Language",
+      difficulty: "easy"
     },
     {
       question: "최초의 프로그래밍 언어로 알려진 것은?",
       options: ["C", "FORTRAN", "Assembly", "Python"],
-      answer: "FORTRAN"
+      answer: "FORTRAN",
+      difficulty: "medium"
     }
   ],
   sports: [
     {
       question: "올림픽은 몇 년마다 열리나요?",
       options: ["2년", "3년", "4년", "5년"],
-      answer: "4년"
+      answer: "4년",
+      difficulty: "easy"
     },
     {
       question: "FIFA 월드컵에서 가장 많은 우승을 차지한 나라는?",
       options: ["독일", "브라질", "이탈리아", "아르헨티나"],
-      answer: "브라질"
+      answer: "브라질",
+      difficulty: "medium"
     }
   ],
   personality: [
     {
       question: "세계적인 음악 프로듀서 퀸시 존스의 국적은?",
       options: ["미국", "영국", "캐나다", "호주"],
-      answer: "미국"
+      answer: "미국",
+      difficulty: "easy"
     },
     {
       question: "대한민국 최초의 여성 대통령은?",
       options: ["박근혜", "문재인", "이낙연", "없음"],
-      answer: "없음"
+      answer: "없음",
+      difficulty: "medium"
     }
   ]
 };
@@ -76,27 +84,27 @@ const resultEl = document.getElementById('result');
 const nextBtn = document.getElementById('nextBtn');
 const menuBtn = document.getElementById('menuBtn');
 
-// 카테고리 버튼 클릭 이벤트
+// 카테고리 버튼 클릭 시 (카테고리 화면 사라지고 난이도 선택 화면 노출)
 document.querySelectorAll('.cat-btn').forEach(btn => {
   btn.addEventListener('click', () => {
     currentCategory = btn.getAttribute('data-cat');
-    // 카테고리 선택 후 난이도 선택 화면으로 전환
     categoryContainer.style.display = 'none';
     difficultyContainer.style.display = 'block';
     difficultyTitle.innerText = `${categoryNames[currentCategory]} 카테고리`;
   });
 });
 
-// 난이도 버튼 클릭 이벤트
+// 난이도 버튼 클릭 시 (난이도 선택 화면 사라지고, 해당 난이도 문제만 필터링)
 document.querySelectorAll('.difficulty-btn').forEach(btn => {
   btn.addEventListener('click', () => {
     currentDifficulty = btn.getAttribute('data-difficulty');
-    // 난이도 선택 후 퀴즈 진행 화면으로 전환
     difficultyContainer.style.display = 'none';
     quizContainer.style.display = 'block';
     quizTitle.innerText = `${categoryNames[currentCategory]} (${getDifficultyText(currentDifficulty)}) 퀴즈`;
-    // 난이도에 따라 문제 필터링 가능 (현재는 전체 문제 사용)
-    currentQuizData = shuffleArray([...quizData[currentCategory]]);
+    // 선택된 난이도에 해당하는 문제만 필터링하여 currentQuizData에 저장
+    currentQuizData = shuffleArray(
+      quizData[currentCategory].filter(q => q.difficulty === currentDifficulty)
+    );
     currentQuiz = 0;
     score = 0;
     loadQuiz();
