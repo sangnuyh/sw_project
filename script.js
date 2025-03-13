@@ -42,8 +42,8 @@ const quizData = {
     {
       question: "객체 지향 프로그래밍의 4대 특성 중, 객체의 내부 데이터와 메서드를 하나로 묶어 외부 접근을 제한하는 개념은 무엇인가?",
       options: ["캡슐화", "상속", "다형성", "추상화"],
-      answer: "FORTRAN",
-      difficulty: "medium"
+      answer: "캡슐화",
+      difficulty: "hard"
     }
   ],
   sports: [
