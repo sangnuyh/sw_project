@@ -1,4 +1,67 @@
-/* 기존 스타일 유지 */
+/* 기본 리셋 및 글로벌 스타일 */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Roboto', sans-serif;
+  background: linear-gradient(135deg, #74ebd5, #ACB6E5);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* 컨테이너 스타일 */
+.container {
+  background: #fff;
+  width: 90%;
+  max-width: 600px;
+  padding: 2rem;
+  border-radius: 10px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+  text-align: center;
+}
+
+/* 헤더 스타일 */
+header h1 {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+  color: #333;
+}
+
+header p {
+  font-size: 1rem;
+  color: #555;
+  margin-bottom: 1.5rem;
+}
+
+/* 카테고리 버튼 스타일 */
+#categories {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.cat-btn {
+  flex: 1 1 calc(45% - 1rem);
+  background: #4CAF50;
+  color: #fff;
+  border: none;
+  padding: 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s, transform 0.2s;
+  font-size: 1rem;
+}
+
+.cat-btn:hover {
+  background: #45a049;
+  transform: scale(1.03);
+}
 
 /* 난이도 선택 버튼 스타일 */
 #difficultyOptions {
@@ -22,4 +85,113 @@
 .difficulty-btn:hover {
   background: #E64A19;
   transform: scale(1.03);
+}
+
+/* 퀴즈 영역 스타일 */
+.quiz {
+  margin: 1rem 0;
+}
+
+.question {
+  font-size: 1.3rem;
+  margin-bottom: 1rem;
+  color: #333;
+}
+
+/* 옵션 버튼 스타일 */
+.options {
+  list-style: none;
+  display: grid;
+  gap: 0.75rem;
+}
+
+.options li {
+  width: 100%;
+}
+
+.option-btn {
+  width: 100%;
+  padding: 0.75rem;
+  font-size: 1rem;
+  border: none;
+  border-radius: 6px;
+  background: #2196F3;
+  color: #fff;
+  cursor: pointer;
+  transition: background 0.3s, transform 0.2s;
+}
+
+.option-btn:hover {
+  background: #1976D2;
+  transform: translateY(-2px);
+}
+
+.option-btn.selected {
+  background-color: #0d47a1;
+}
+
+/* 하단 액션 버튼 스타일 */
+footer {
+  margin-top: 1.5rem;
+}
+
+.action-btn {
+  width: 100%;
+  padding: 0.75rem;
+  font-size: 1rem;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-top: 0.5rem;
+  transition: background 0.3s, transform 0.2s;
+}
+
+#nextBtn {
+  background: #FF9800;
+  color: #fff;
+}
+
+#nextBtn:hover {
+  background: #F57C00;
+  transform: translateY(-2px);
+}
+
+#menuBtn {
+  background: #9C27B0;
+  color: #fff;
+}
+
+#menuBtn:hover {
+  background: #7B1FA2;
+  transform: translateY(-2px);
+}
+
+/* 결과 메시지 스타일 */
+.result {
+  margin-top: 1rem;
+  font-size: 1.1rem;
+  color: #E91E63;
+  min-height: 1.5rem;
+}
+
+/* 반응형 디자인 */
+@media (max-width: 480px) {
+  header h1 {
+    font-size: 1.5rem;
+  }
+  
+  .cat-btn {
+    padding: 0.75rem;
+    font-size: 0.9rem;
+  }
+  
+  .option-btn {
+    padding: 0.65rem;
+    font-size: 0.9rem;
+  }
+  
+  .action-btn {
+    padding: 0.65rem;
+    font-size: 0.9rem;
+  }
 }
