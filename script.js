@@ -12,6 +12,18 @@ const quizData = {
       options: ["1919", "1945", "1931", "1950"],
       answer: "1919",
       difficulty: "medium"
+    },
+    {
+      question: "고려와 친교를 맺고 사이좋게 지냈던 나라는?",
+      options: ["청나라", "송나라", "명나라", "요나라"],
+      answer: "송나라",
+      difficulty: "hard"
+    },
+    {
+      question: "test",
+      options: ["t", "e", "ss", "정답답"],
+      answer: "정답",
+      difficulty: "hard"
     }
   ],
   it: [
@@ -24,6 +36,12 @@ const quizData = {
     {
       question: "최초의 프로그래밍 언어로 알려진 것은?",
       options: ["C", "FORTRAN", "Assembly", "Python"],
+      answer: "FORTRAN",
+      difficulty: "medium"
+    },
+    {
+      question: "객체 지향 프로그래밍의 4대 특성 중, 객체의 내부 데이터와 메서드를 하나로 묶어 외부 접근을 제한하는 개념은 무엇인가?",
+      options: ["캡슐화", "상속", "다형성", "추상화"],
       answer: "FORTRAN",
       difficulty: "medium"
     }
@@ -40,6 +58,12 @@ const quizData = {
       options: ["독일", "브라질", "이탈리아", "아르헨티나"],
       answer: "브라질",
       difficulty: "medium"
+    },
+    {
+      question: "월드컵 결승전에서 해트트릭을 한 첫 번째 선수는?",
+      options: ["제프 허스트", "킬리안 음바페", "에우제비우", "프랑크 레이카르트"],
+      answer: "허스트",
+      difficulty: "hard"
     }
   ],
   personality: [
