@@ -11,7 +11,7 @@ const quizData = {
       question: "대한민국 임시정부가 수립된 해는?",
       options: ["1919", "1945", "1931", "1950"],
       answer: "1919",
-      difficulty: "hard"
+      difficulty: "medium"
     },
     {
       question: "고려와 친교를 맺고 사이좋게 지냈던 나라는?",
@@ -78,6 +78,12 @@ const quizData = {
       options: ["박근혜", "문재인", "이낙연", "없음"],
       answer: "없음",
       difficulty: "medium"
+    },
+    {
+      question: "대한민국 최초의 여성 대통령은?",
+      options: ["박근혜", "문재인", "이낙연", "없음"],
+      answer: "없음",
+      difficulty: "hard"
     }
   ]
 };
