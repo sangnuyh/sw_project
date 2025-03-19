@@ -1,3 +1,10 @@
+@font-face {
+  font-family: 'BMJUA';
+  src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/BMJUA.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
 /* 기본 리셋 및 글로벌 스타일 */
 * {
   margin: 0;
@@ -6,15 +13,34 @@
   font-family: 'BMJUA';
 }
 
-@font-face {
-  font-family: 'BMJUA';
-  src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/BMJUA.woff') format('woff');
-  font-weight: normal;
-  font-style: normal;
+a{
+  color: inherit;
+  text-decoration: none;
 }
 
-body {
+body{
   background: linear-gradient(135deg, #74ebd5, #ACB6E5);
+}
+
+.loginDivPa{
+  width: 10rem;
+  display: flex;
+  padding-left: 61rem;
+  padding-top: 2rem;
+}
+
+.loginDivCh{
+  flex: 1 0 auto;
+  margin-left: 1.8rem;
+  border-radius: 10px;
+  transition: background-color 0.3s, transform 0.2s;
+  text-align: center;
+  padding: 0.2rem;
+}
+
+main {
+  margin-top: -4rem;
+  margin-left: -2rem;
   min-height: 100vh;
   display: flex;
   justify-content: center;
@@ -32,17 +58,16 @@ body {
   text-align: center;
 }
 
-/* 헤더 스타일 */
-header h1 {
-  font-size: 2rem;
-  margin-bottom: 0.5rem;
+/* 제목목 스타일 */
+.title{
+  font-size: 1rem;
+  margin-bottom: 0.9rem;
   color: #333;
 }
 
-header p {
+title p {
   font-size: 1rem;
   color: #555;
-  margin-bottom: 1.5rem;
 }
 
 /* 카테고리 버튼 스타일 */
@@ -53,7 +78,7 @@ header p {
   gap: 1rem;
 }
 
-.cat-btn {
+.catBtn {
   flex: 1 1 calc(45% - 1rem);
   background: #4CAF50;
   color: #fff;
@@ -61,11 +86,11 @@ header p {
   padding: 1rem;
   border-radius: 8px;
   cursor: pointer;
-  transition: background 0.3s, transform 0.2s;
+  transition-duration: 0.3s;
   font-size: 1rem;
 }
 
-.cat-btn:hover {
+.catBtn:hover {
   background: #45a049;
   transform: scale(1.03);
 }
@@ -78,7 +103,7 @@ header p {
   flex-wrap: wrap;
 }
 
-.difficulty-btn {
+.difficultyBtn {
   background: #FF5722;
   color: #fff;
   border: none;
@@ -86,10 +111,10 @@ header p {
   font-size: 1rem;
   border-radius: 8px;
   cursor: pointer;
-  transition: background 0.3s, transform 0.2s;
+  transition-duration: 0.3s;
 }
 
-.difficulty-btn:hover {
+.difficultyBtn:hover {
   background: #E64A19;
   transform: scale(1.03);
 }
@@ -116,7 +141,7 @@ header p {
   width: 100%;
 }
 
-.option-btn {
+.optionBtn {
   width: 100%;
   padding: 0.75rem;
   font-size: 1rem;
@@ -125,15 +150,15 @@ header p {
   background: #2196F3;
   color: #fff;
   cursor: pointer;
-  transition: background 0.3s, transform 0.2s;
+  transition-duration: 0.3s;
 }
 
-.option-btn:hover {
+.optionBtn:hover {
   background: #1976D2;
   transform: translateY(-2px);
 }
 
-.option-btn.selected {
+.optionBtn.selected {
   background-color: #0d47a1;
 }
 
@@ -142,7 +167,7 @@ footer {
   margin-top: 1.5rem;
 }
 
-.action-btn {
+.actionBtn {
   width: 100%;
   padding: 0.75rem;
   font-size: 1rem;
@@ -150,7 +175,7 @@ footer {
   border-radius: 6px;
   cursor: pointer;
   margin-top: 0.5rem;
-  transition: background 0.3s, transform 0.2s;
+  transition-duration: 0.3s;
 }
 
 #nextBtn {
@@ -183,21 +208,21 @@ footer {
 
 /* 반응형 디자인 */
 @media (max-width: 480px) {
-  header h1 {
+  title h1 {
     font-size: 1.5rem;
   }
   
-  .cat-btn {
+  .catBtn {
     padding: 0.75rem;
     font-size: 0.9rem;
   }
   
-  .option-btn {
+  .optionBtn {
     padding: 0.65rem;
     font-size: 0.9rem;
   }
   
-  .action-btn {
+  .actionBtn {
     padding: 0.65rem;
     font-size: 0.9rem;
   }

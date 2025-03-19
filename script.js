@@ -1,3 +1,12 @@
+/* 추가 예정, 구상
+회원가입
+각 카테고리, 난이도별 정답률
+랜덤한 카테고리별로 문제 10개
+퀘스트? -> 보상? -> 스킨 or 힌트권 or 재화
+경쟁 기능(랭킹전, 각 문제당 시간제한)
+캐릭터 시스템 -> 힌트 or 문제 스킵
+*/
+
 // 퀴즈 데이터에 각 문제의 난이도를 추가합니다.
 const quizData = {
   history: [
@@ -5,6 +14,12 @@ const quizData = {
       question: "조선의 창업자는 누구인가?",
       options: ["이성계", "세종대왕", "태조", "광해군"],
       answer: "태조",
+      difficulty: "easy"
+    },
+    {
+      question: "이지 문제",
+      options: ["1", "2", "3", "4"],
+      answer: "정답",
       difficulty: "easy"
     },
     {
@@ -62,7 +77,7 @@ const quizData = {
     {
       question: "월드컵 결승전에서 해트트릭을 한 첫 번째 선수는?",
       options: ["제프 허스트", "킬리안 음바페", "에우제비우", "프랑크 레이카르트"],
-      answer: "허스트",
+      answer: "제프 허스트",
       difficulty: "hard"
     }
   ],
@@ -74,15 +89,15 @@ const quizData = {
       difficulty: "easy"
     },
     {
-      question: "대한민국 최초의 여성 대통령은?",
-      options: ["박근혜", "문제인", "이낙연", "없음"],
-      answer: "없음",
+      question: "인물 퀴즈 보통",
+      options: ["12", "34", "56", "정답"],
+      answer: "정답",
       difficulty: "medium"
     },
     {
-      question: "대한민국 최초의 여성 대통령은?",
-      options: ["박근혜", "문제인", "이낙연", "없음"],
-      answer: "없음",
+      question: "인물 퀴즈 어려움",
+      options: ["12", "34", "45", "정답"],
+      answer: "정답",
       difficulty: "hard"
     }
   ]
@@ -115,17 +130,17 @@ const nextBtn = document.getElementById('nextBtn');
 const menuBtn = document.getElementById('menuBtn');
 
 // 카테고리 버튼 클릭 시 (카테고리 화면 사라지고 난이도 선택 화면 노출)
-document.querySelectorAll('.cat-btn').forEach(btn => {
+document.querySelectorAll('.catBtn').forEach(btn => {
   btn.addEventListener('click', () => {
     currentCategory = btn.getAttribute('data-cat');
     categoryContainer.style.display = 'none';
     difficultyContainer.style.display = 'block';
-    difficultyTitle.innerText = `${categoryNames[currentCategory]} 카테고리`;
+    difficultyTitle.innerText = `${categoryNames[currentCategory]}`;``
   });
 });
 
 // 난이도 버튼 클릭 시 (난이도 선택 화면 사라지고, 해당 난이도 문제만 필터링)
-document.querySelectorAll('.difficulty-btn').forEach(btn => {
+document.querySelectorAll('.difficultyBtn').forEach(btn => {
   btn.addEventListener('click', () => {
     currentDifficulty = btn.getAttribute('data-difficulty');
     difficultyContainer.style.display = 'none';
@@ -167,7 +182,7 @@ function loadQuiz() {
     shuffledOptions.forEach(option => {
       const li = document.createElement('li');
       const btn = document.createElement('button');
-      btn.className = 'option-btn';
+      btn.className = 'optionBtn';
       btn.innerText = option;
       btn.addEventListener('click', (e) => selectAnswer(option, e.currentTarget));
       li.appendChild(btn);
