@@ -20,6 +20,8 @@ a{
 
 body{
   background: linear-gradient(135deg, #74ebd5, #ACB6E5);
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 .loginDivPa{
@@ -58,7 +60,7 @@ main {
   text-align: center;
 }
 
-/* 제목목 스타일 */
+/* 제목 스타일 */
 .title{
   font-size: 1rem;
   margin-bottom: 0.9rem;
