@@ -24,11 +24,16 @@ body{
   background-size: cover;
 }
 
+header{
+  height: 0;
+}
+
 .loginDivPa{
   width: 10rem;
   display: flex;
-  padding-left: 61rem;
-  padding-top: 2rem;
+  position: relative;
+  left: 0.6rem;
+  top: 1.3rem;
 }
 
 .loginDivCh{
@@ -41,8 +46,7 @@ body{
 }
 
 main {
-  margin-top: -4rem;
-  margin-left: -2rem;
+  float: none;
   min-height: 100vh;
   display: flex;
   justify-content: center;
