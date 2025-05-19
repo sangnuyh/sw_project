@@ -1,4 +1,6 @@
 # config/urls.py
+# [파일 설명]
+# 프로젝트 전역의 URL 패턴을 정의. 각 앱의 urls.py와 연결함.
 
 from django.contrib import admin
 from django.urls import path, include

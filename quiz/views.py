@@ -1,3 +1,6 @@
+# [파일 설명]
+# 퀴즈 결과 저장, 퀴즈 기록 조회 기능을 처리하는 뷰 함수들이 정의됨.
+
 # quiz/views.py
 
 from django.shortcuts import render, redirect
