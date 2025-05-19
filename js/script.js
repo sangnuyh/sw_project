@@ -179,7 +179,7 @@ const quizData = {
       options: ["모니터", "키보드", "마우스", "프린터"],
       answer: "모니터",
       difficulty: "easy"
-    }
+    },
     {
       question: "데이터베이스에서 정규화의 주요 목적은 무엇인가?",
       options: ["데이터 중복 제거", "데이터 암호화", "데이터 압축", "데이터 백업"],
@@ -1380,7 +1380,7 @@ const quizData = {
       difficulty: "easy"
     },
     {
-      question: "‘이데아’를 주장한 철학자는 누구인가?",
+      question: "‘이데아'를 주장한 철학자는 누구인가?",
       options: ["아리스토텔레스", "플라톤", "소크라테스", "제논"],
       answer: "플라톤",
       difficulty: "easy"
@@ -1440,7 +1440,7 @@ const quizData = {
       difficulty: "easy"
     },
     {
-      question: "‘시치미 떼다’와 관련있는 동물은 무엇인가?",
+      question: "‘시치미 떼다'와 관련있는 동물은 무엇인가?",
       options: ["매", "꿩", "비둘기", "참새"],
       answer: "매",
       difficulty: "easy"
@@ -1489,7 +1489,7 @@ document.querySelectorAll('.catBtn').forEach(btn => {
     currentCategory = btn.getAttribute('data-cat');
     categoryContainer.style.display = 'none';
     difficultyContainer.style.display = 'block';
-    difficultyTitle.innerText = `${categoryNames[currentCategory]}`;``
+    difficultyTitle.innerText = `${categoryNames[currentCategory]}`;
   });
 });
 
