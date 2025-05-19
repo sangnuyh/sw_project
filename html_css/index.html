@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>종합 퀴즈</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+</head>
+<body>
+  <header>
+    <div class="loginDivPa">
+      <div class="loginDivCh login"><a href="login.html">로그인</a></div>
+      <div class="loginDivCh joinMember"><a href="joinMember.html">회원가입</a></div>
+    </div>
+  </header>
+
+  <main>
+    <!-- 카테고리 선택 화면 -->
+    <div id="categoryContainer" class="container">
+      <div class="title">
+        <h1>종합 퀴즈</h1>
+        <p>카테고리를 선택해 주세요!</p>
+      </div>
+      <section id="categories">
+        <button class="catBtn" data-cat="history">역사</button>
+        <button class="catBtn" data-cat="it">IT</button>
+        <button class="catBtn" data-cat="sports">스포츠</button>
+        <button class="catBtn" data-cat="commonSense">상식</button>
+      </section>
+    </div>
+
+    <!-- 난이도 선택 화면 -->
+    <div id="difficultyContainer" class="container" style="display:none;">
+      <div class="title">
+        <h1 id="difficultyTitle"></h1>
+        <p>난이도를 선택해 주세요!</p>
+      </div class="title">
+      <section id="difficultyOptions">
+        <button class="difficultyBtn" data-difficulty="easy">이지</button>
+        <button class="difficultyBtn" data-difficulty="medium">노말</button>
+        <button class="difficultyBtn" data-difficulty="hard">하드</button>
+      </section>
+    </div>
+
+    <!-- 퀴즈 진행 화면 -->
+    <div id="quizContainer" class="container" style="display:none;">
+      <div class="title">
+        <h1 id="quizTitle"></h1>
+      </div class="title">
+      <section class="quiz">
+        <div id="question" class="question">문제가 여기에 표시됩니다.</div>
+        <ul id="options" class="options">
+          <!-- 옵션 버튼들이 동적으로 생성됩니다. -->
+        </ul>
+        <div id="result" class="result"></div>
+      </section>
+      <footer>
+        <button id="nextBtn" class="actionBtn">다음 문제</button>
+        <button id="menuBtn" class="actionBtn" style="display:none;">메인 메뉴로 돌아가기</button>
+      </footer>
+    </div>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
