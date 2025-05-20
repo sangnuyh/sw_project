@@ -33,8 +33,8 @@ def login_view(request):
 # 로그아웃
 def logout_view(request):
     logout(request)
-    return redirect('login')
+    return redirect('index')
 
-@login_required
-def home(request):
-    return render(request, 'accounts/home.html')
+def index(request):
+    return render(request, 'accounts/index.html')
+

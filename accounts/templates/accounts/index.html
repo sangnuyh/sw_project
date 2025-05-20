@@ -1,20 +1,29 @@
+ {% load static %}
 <!DOCTYPE html>
 <html lang="ko">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>종합 퀴즈</title>
-  <link rel="stylesheet" href="styles.css">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+  <script src="{% static 'js/script.js' %}" defer></script>
 </head>
 <body>
   <header>
-    <div class="loginDivPa">
-      <div class="loginDivCh login"><a href="login.html">로그인</a></div>
-      <div class="loginDivCh joinMember"><a href="joinMember.html">회원가입</a></div>
-    </div>
+  <div class="loginDivPa">
+    {% if request.user.is_authenticated %}
+      <div class="loginDivCh welcomeMsg">{{ request.user.username }}님 환영합니다!</div>
+      <div class="loginDivCh logout"><a href="{% url 'logout' %}">로그아웃</a></div>
+    {% else %}
+      <div class="loginDivCh login"><a href="{% url 'login' %}">로그인</a></div>
+      <div class="loginDivCh joinMember"><a href="{% url 'signup' %}">회원가입</a></div>
+    {% endif %}
+  </div>
   </header>
+
+  
+  <!-- 이 코드 아래 내용은 그대로 되어 있습니다! -->
+
 
   <main>
     <!-- 카테고리 선택 화면 -->
@@ -36,7 +45,7 @@
       <div class="title">
         <h1 id="difficultyTitle"></h1>
         <p>난이도를 선택해 주세요!</p>
-      </div class="title">
+      </div>
       <section id="difficultyOptions">
         <button class="difficultyBtn" data-difficulty="easy">이지</button>
         <button class="difficultyBtn" data-difficulty="medium">노말</button>
@@ -63,6 +72,5 @@
     </div>
   </main>
 
-  <script src="script.js"></script>
 </body>
 </html>
