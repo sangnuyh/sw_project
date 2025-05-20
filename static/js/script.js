@@ -696,91 +696,550 @@ const quizData = {
       options: ["CMS", "KIOS", "OTP", "ATM"],
       answer: "OTP",
       difficulty: "hard"
-    },
-    {
-      question: "의회의 표결에서 가부동수(可否同數)일 때, 의장이 던지는 결정권 투표를 무엇이라 하는가?",
-      options: ["필리버스터", "캐스팅 보트", "크로스보팅", "게리맨더링"],
-      answer: "캐스팅 보트",
-      difficulty: "hard"
-    },
-    {
-      question: "다음 사자성어 중에서 숫자의 합은 얼마인가? 남가일몽, 장삼이사, 군계일학",
-      options: ["4", "5", "9", "11"],
-      answer: "9",
-      difficulty: "hard"
-    },
-    {
-      question: "자신을 위한 소비에 적극적인 20~30대 여성을 칭하는 유형을 무엇이라 하는가?",
-      options: ["로엘족", "포미족", "메트로섹슈얼족", "여미족"],
-      answer: "포미족",
-      difficulty: "hard"
-    },
-    {
-      question: "문화유적이나 예술 등을 무분별하게 파괴하는 행위를 무엇이라 하는가?",
-      options: ["반달리즘", "쇼비니즘", "네가홀리즘", "노니즘"],
-      answer: "반달리즘",
-      difficulty: "hard"
-    },
-    {
-      question: "황순원의 작품이 아닌 것은?",
-      options: ["학", "별", "소나기", "광장"],
-      answer: "광장",
-      difficulty: "hard"
-    },
-    {
-      question: "극비문서를 몰래 발표하는 저널리즘을 무엇이라 하는가?",
-      options: ["시크릿 저널리즘", "새도우 저널리즘", "제록스 저널리즘", "블랙 저널리즘"],
-      answer: "제록스 저널리즘",
-      difficulty: "hard"
-    },
-    {
-      question: "화폐유통의 '폐단'을 지적한 학자와 '필요성'을 지적한 학자를 바르게 연결한 것은?",
-      options: ["유형원 - 유수원", "정약용 - 이익", "박제가 - 홍대용", "이익 - 박지원"],
-      answer: "이익 - 박지원",
-      difficulty: "hard"
-    },
-    {
-      question: "다음 사자성어 중 한자 뜻이 다른 것은?",
-      options: ["우이독경(牛耳讀經)", "우이송경(牛耳誦經)", "마부작침(磨斧作針)", "마이동풍(馬耳東風)"],
-      answer: "마부작침(磨斧作針)",
-      difficulty: "hard"
-    },
-    {
-      question: "다음 중 4P가 아닌 것은?",
-      options: ["people", "place", "price", "promotion"],
-      answer: "people",
-      difficulty: "hard"
-    },
-    {
-      question: "어떤 상황이 처음에는 미미하게 진행되다가 어느 순간 균형을 깨고 모든 것이 한순간에 변화되는 극적인 순간을 무엇이라 하는가?",
-      options: ["디아스포라", "티핑포인트", "퀀텀점프", "팻 핑거"],
-      answer: "티핑포인트",
-      difficulty: "hard"
-    },
-    {
-      question: "근거가 없고 이치에 맞지 않는 것을 억지로 끌어대어 자기에게 유리하도록 맞춘다는 사자성어는 무엇인가?",
-      options: ["권불십년(權不十年)", "견강부회(牽强附會)", "권토중래(捲土重來)", "누란지위(累卵之危)"],
-      answer: "견강부회(牽强附會)",
-      difficulty: "hard"
     }
   ],
   sports: [
+    //easy
     {
-      question: "올림픽은 몇 년마다 열리나요?",
-      options: ["2년", "3년", "4년", "5년"],
-      answer: "4년",
+      question: "공과 네트를 사용해 코트에서 진행되며, 종종 '아름다운 게임'이라 불리는 스포츠는 무엇인가요?",
+      options: ["농구", "축구", "배구", "테니스"],
+      answer: "축구",
       difficulty: "easy"
     },
     {
-      question: "FIFA 월드컵에서 가장 많은 우승을 차지한 나라는?",
-      options: ["독일", "브라질", "이탈리아", "아르헨티나"],
-      answer: "브라질",
+      question: "작은 흰 공을 잔디 코스의 홀에 넣는 스포츠는 무엇인가요?",
+      options: ["골프", "하키", "야구", "크리켓"],
+      answer: "골프",
+      difficulty: "easy"
+    },
+    {
+      question: "4년마다 열리는 주요 국제 축구 토너먼트의 이름은 무엇인가요?",
+      options: ["슈퍼볼", "월드컵", "윔블던", "스탠리컵"],
+      answer: "월드컵",
+      difficulty: "easy"
+    },
+    {
+      question: "테니스에서 공을 치는 데 사용하는 장비는 무엇인가요?",
+      options: ["배트", "라켓", "스틱", "클럽"],
+      answer: "라켓",
+      difficulty: "easy"
+    },
+    {
+      question: "농구에서 3점 라인 너머에서 던진 슛은 몇 점인가요?",
+      options: ["1", "2", "3", "4"],
+      answer: "3",
+      difficulty: "easy"
+    },
+    {
+      question: "수영, 사이클링, 달리기를 하나의 경기에서 진행하는 스포츠는 무엇인가요?",
+      options: ["트라이애슬론", "데카슬론", "펜타슬론", "마라톤"],
+      answer: "트라이애슬론",
+      difficulty: "easy"
+    },
+    {
+      question: "브라질과 함께 월드컵 3회 우승을 차지하며 '축구의 왕'으로 알려진 선수는 누구인가요?",
+      options: ["리오넬 메시", "크리스티아누 호날두", "펠레", "디에고 마라도나"],
+      answer: "펠레",
+      difficulty: "easy"
+    },
+    {
+      question: "운동선수들이 400미터 타원형 트랙을 달리는 스포츠는 무엇인가요?",
+      options: ["수영", "육상", "체조", "사이클링"],
+      answer: "육상",
+      difficulty: "easy"
+    },
+    {
+      question: "야구에서 공을 치는 데 사용하는 배트의 이름은 무엇인가요?",
+      options: ["클럽", "스틱", "배트", "라켓"],
+      answer: "배트",
+      difficulty: "easy"
+    },
+    {
+      question: "얼음 위에서 퍽과 스틱으로 진행되는 스포츠는 무엇인가요?",
+      options: ["축구", "아이스하키", "농구", "럭비"],
+      answer: "아이스하키",
+      difficulty: "easy"
+    },
+    {
+      question: "무거운 공으로 핀을 쓰러뜨리는 스포츠는 무엇인가요?",
+      options: ["볼링", "당구", "다트", "골프"],
+      answer: "볼링",
+      difficulty: "easy"
+    },
+    {
+      question: "축구 경기에서 한 팀이 필드에 내보낼 수 있는 최대 선수 수는 몇 명인가요?",
+      options: ["7", "9", "11", "13"],
+      answer: "11",
+      difficulty: "easy"
+    },
+    {
+      question: "4년마다 열리는 세계 최대의 멀티스포츠 이벤트는 무엇인가요?",
+      options: ["FIFA 월드컵", "올림픽", "슈퍼볼", "투르 드 프랑스"],
+      answer: "올림픽",
+      difficulty: "easy"
+    },
+    {
+      question: "테니스에서 점수가 0일 때 사용하는 용어는 무엇인가요?",
+      options: ["러브", "제로", "닐", "포인트"],
+      answer: "러브",
+      difficulty: "easy"
+    },
+    {
+      question: "수영에서 가장 기본적인 영법은 무엇인가요?",
+      options: ["자유형", "배영", "평영", "접영"],
+      answer: "자유형",
+      difficulty: "easy"
+    },
+    {
+      question: "농구 코트에서 골대 높이는 몇 미터인가요?",
+      options: ["2미터", "2.5미터", "3미터", "3.05미터"],
+      answer: "3.05미터",
+      difficulty: "easy"
+    },
+    {
+      question: "올림픽에서 금, 은, 동 메달을 수여하는 경기는 무엇인가요?",
+      options: ["친선 경기", "예선 경기", "결승 경기", "오프닝 경기"],
+      answer: "결승 경기",
+      difficulty: "easy"
+    },
+    {
+      question: "야구에서 한 팀이 한 이닝에 공격할 수 있는 아웃카운트는 몇 개인가요?",
+      options: ["2", "3", "4", "5"],
+      answer: "3",
+      difficulty: "easy"
+    },
+    {
+      question: "탁구에서 공을 치는 데 사용하는 도구는 무엇인가요?",
+      options: ["패들", "라켓", "배트", "스틱"],
+      answer: "패들",
+      difficulty: "easy"
+    },
+    {
+      question: "권투 경기가 진행되는 장소는 무엇이라고 하나요?",
+      options: ["코트", "링", "필드", "트랙"],
+      answer: "링",
+      difficulty: "easy"
+    },
+    {
+      question: "배구에서 한 팀의 필드 내 선수 수는 몇 명인가요?",
+      options: ["4", "5", "6", "7"],
+      answer: "6",
+      difficulty: "easy"
+    },
+    {
+      question: "스키와 스노보드를 포함하는 겨울 스포츠는 어떤 대회에서 주로 볼 수 있나요?",
+      options: ["하계 올림픽", "동계 올림픽", "월드컵", "코먼웰스 게임"],
+      answer: "동계 올림픽",
+      difficulty: "easy"
+    },
+    {
+      question: "축구에서 골키퍼가 주로 사용하는 신체 부위는 무엇인가요?",
+      options: ["발", "손", "머리", "어깨"],
+      answer: "손",
+      difficulty: "easy"
+    },
+    {
+      question: "테니스에서 한 세트는 보통 몇 게임을 이겨야 하나요?",
+      options: ["4", "5", "6", "7"],
+      answer: "6",
+      difficulty: "easy"
+    },
+    {
+      question: "마라톤의 공식 거리는 약 몇 킬로미터인가요?",
+      options: ["21킬로미터", "42킬로미터", "50킬로미터", "100킬로미터"],
+      answer: "42킬로미터",
+      difficulty: "easy"
+    },
+    {
+      question: "배드민턴에서 공 대신 사용하는 것은 무엇인가요?",
+      options: ["볼", "셔틀콕", "퍽", "디스크"],
+      answer: "셔틀콕",
+      difficulty: "easy"
+    },
+    {
+      question: "체조에서 선수들이 공연하는 장소는 무엇이라고 하나요?",
+      options: ["매트", "링", "코트", "트랙"],
+      answer: "매트",
+      difficulty: "easy"
+    },
+    {
+      question: "럭비에서 공을 운반하며 득점하려는 동작은 무엇인가요?",
+      options: ["킥", "패스", "트라이", "슛"],
+      answer: "트라이",
+      difficulty: "easy"
+    },
+    {
+      question: "골프에서 홀에 공을 넣는 데 성공한 횟수를 무엇이라고 하나요?",
+      options: ["스트로크", "슛", "킥", "포인트"],
+      answer: "스트로크",
+      difficulty: "easy"
+    },
+    {
+      question: "수영 경기에서 선수들이 출발할 때 뛰어드는 장소는 무엇인가요?",
+      options: ["다이빙 보드", "스타팅 블록", "플랫폼", "레인"],
+      answer: "스타팅 블록",
+      difficulty: "easy"
+    },
+    //medium
+    {
+      question: "축구에서 오프사이드 규칙이 공식적으로 도입된 시기는 언제인가요?",
+      options: ["1863년", "1902년", "1925년", "1950년"],
+      answer: "1863년",
       difficulty: "medium"
     },
     {
-      question: "월드컵 결승전에서 해트트릭을 한 첫 번째 선수는?",
-      options: ["제프 허스트", "킬리안 음바페", "에우제비우", "프랑크 레이카르트"],
-      answer: "제프 허스트",
+      question: "농구에서 한 팀이 한 쿼터에 요청할 수 있는 타임아웃 횟수는 최대 몇 번인가요?",
+      options: ["2번", "3번", "4번", "5번"],
+      answer: "3번",
+      difficulty: "medium"
+    },
+    {
+      question: "테니스 그랜드슬램 대회 중 클레이 코트에서 열리는 대회는 무엇인가요?",
+      options: ["윔블던", "US 오픈", "프랑스 오픈", "호주 오픈"],
+      answer: "프랑스 오픈",
+      difficulty: "medium"
+    },
+    {
+      question: "야구에서 투수가 한 타자에게 연속으로 세 번 스트라이크를 던지면 무엇이라고 하나요?",
+      options: ["스트라이크아웃", "파울볼", "홈런", "볼넷"],
+      answer: "스트라이크아웃",
+      difficulty: "medium"
+    },
+    {
+      question: "수영에서 4가지 영법(자유형, 배영, 평영, 접영)을 모두 포함하는 경기는 무엇인가요?",
+      options: ["혼계영", "개인혼영", "자유형 릴레이", "배영 릴레이"],
+      answer: "개인혼영",
+      difficulty: "medium"
+    },
+    {
+      question: "올림픽에서 남자 축구 금메달을 가장 많이 획득한 국가는 어디인가요?",
+      options: ["브라질", "아르헨티나", "헝가리", "영국"],
+      answer: "헝가리",
+      difficulty: "medium"
+    },
+    {
+      question: "배구에서 서브를 넣은 팀이 즉시 득점하지 않고 공을 주고받는 상황을 무엇이라고 하나요?",
+      options: ["랠리", "블록", "디그", "스파이크"],
+      answer: "랠리",
+      difficulty: "medium"
+    },
+    {
+      question: "탁구에서 공식 경기용 탁구대의 길이는 몇 미터인가요?",
+      options: ["2.44미터", "2.74미터", "3.05미터", "3.66미터"],
+      answer: "2.74미터",
+      difficulty: "medium"
+    },
+    {
+      question: "아이스하키에서 한 팀이 페널티로 인해 선수가 줄어들 때를 무엇이라고 하나요?",
+      options: ["파워 플레이", "쇼트핸디드", "오버타임", "슛아웃"],
+      answer: "쇼트핸디드",
+      difficulty: "medium"
+    },
+    {
+      question: "골프에서 파보다 한 타 적게 홀을 마무리한 경우를 무엇이라고 하나요?",
+      options: ["이글", "버디", "파", "보기"],
+      answer: "버디",
+      difficulty: "medium"
+    },
+    {
+      question: "FIFA 월드컵에서 여성 대회가 처음 열린 연도는 언제인가요?",
+      options: ["1987년", "1991년", "1995년", "1999년"],
+      answer: "1991년",
+      difficulty: "medium"
+    },
+    {
+      question: "테니스에서 한 플레이어가 한 세트에서 모든 게임을 이기는 경우를 무엇이라고 하나요?",
+      options: ["골든 세트", "퍼펙트 세트", "스트레이트 세트", "완벽 세트"],
+      answer: "골든 세트",
+      difficulty: "medium"
+    },
+    {
+      question: "야구에서 한 시즌에 40홈런과 40도루를 동시에 달성한 기록을 무엇이라고 하나요?",
+      options: ["40-40 클럽", "듀얼 클럽", "홈런-도루 클럽", "골든 레코드"],
+      answer: "40-40 클럽",
+      difficulty: "medium"
+    },
+    {
+      question: "수영 릴레이 경기에서 한 팀은 몇 명의 선수로 구성되나요?",
+      options: ["2명", "3명", "4명", "5명"],
+      answer: "4명",
+      difficulty: "medium"
+    },
+    {
+      question: "농구에서 공을 바닥에 튕기며 이동하는 동작을 무엇이라고 하나요?",
+      options: ["패스", "드리블", "슛", "리바운드"],
+      answer: "드리블",
+      difficulty: "medium"
+    },
+    {
+      question: "올림픽 마라톤 코스의 공식 거리는 몇 킬로미터인가요?",
+      options: ["40킬로미터", "42.195킬로미터", "45킬로미터", "50킬로미터"],
+      answer: "42.195킬로미터",
+      difficulty: "medium"
+    },
+    {
+      question: "배드민턴에서 한 게임은 보통 몇 점까지 진행되나요?",
+      options: ["15점", "21점", "25점", "30점"],
+      answer: "21점",
+      difficulty: "medium"
+    },
+    {
+      question: "권투에서 경기 중 선수가 쓰러져 10초 안에 일어나지 못하면 무엇이라고 하나요?",
+      options: ["녹아웃", "테크니컬 녹아웃", "포인트 아웃", "디스퀄리피케이션"],
+      answer: "녹아웃",
+      difficulty: "medium"
+    },
+    {
+      question: "축구에서 페널티 킥은 골문에서 몇 미터 떨어진 지점에서 실행되나요?",
+      options: ["9미터", "11미터", "12미터", "15미터"],
+      answer: "11미터",
+      difficulty: "medium"
+    },
+    {
+      question: "테니스에서 윔블던 대회는 어떤 표면에서 진행되나요?",
+      options: ["클레이", "하드코트", "잔디", "카펫"],
+      answer: "잔디",
+      difficulty: "medium"
+    },
+    {
+      question: "아이스하키에서 정규 경기 시간이 끝난 후 동점을 해결하기 위해 진행되는 시간은 무엇인가요?",
+      options: ["오버타임", "슛아웃", "파워 플레이", "페널티 타임"],
+      answer: "오버타임",
+      difficulty: "medium"
+    },
+    {
+      question: "골프에서 한 홀을 기준 타수보다 두 타 더 많이 친 경우를 무엇이라고 하나요?",
+      options: ["버디", "보기", "더블 보기", "트리플 보기"],
+      answer: "더블 보기",
+      difficulty: "medium"
+    },
+    {
+      question: "배구에서 한 세트는 보통 몇 점에서 승리하나요?",
+      options: ["15점", "21점", "25점", "30점"],
+      answer: "25점",
+      difficulty: "medium"
+    },
+    {
+      question: "탁구에서 한 선수가 연속으로 서브를 할 수 있는 횟수는 몇 번인가요?",
+      options: ["1번", "2번", "3번", "4번"],
+      answer: "2번",
+      difficulty: "medium"
+    },
+    {
+      question: "스키 점프 경기에서 점수는 어떤 두 가지 요소를 기준으로 매겨지나요?",
+      options: ["속도와 높이", "거리와 스타일", "시간과 정확도", "점프와 착지"],
+      answer: "거리와 스타일",
+      difficulty: "medium"
+    },
+    {
+      question: "농구에서 한 선수가 한 경기에서 10점 이상, 10리바운드 이상, 10어시스트 이상을 기록하면 무엇이라고 하나요?",
+      options: ["더블더블", "트리플더블", "쿼드러플더블", "퍼펙트 게임"],
+      answer: "트리플더블",
+      difficulty: "medium"
+    },
+    {
+      question: "축구에서 UEFA 챔피언스 리그는 어떤 팀들이 참가하나요?",
+      options: ["국가 대표팀", "클럽 팀", "아마추어 팀", "청소년 팀"],
+      answer: "클럽 팀",
+      difficulty: "medium"
+    },
+    {
+      question: "테니스에서 한 플레이어가 상대의 서브를 받아 바로 득점하는 샷을 무엇이라고 하나요?",
+      options: ["에이스", "리턴 에이스", "볼리", "드롭샷"],
+      answer: "리턴 에이스",
+      difficulty: "medium"
+    },
+    {
+      question: "야구에서 한 이닝에 양 팀 모두 3아웃을 당하면 이닝이 종료되는데, 이를 몇 번째 아웃이라고 하나요?",
+      options: ["3번째", "6번째", "9번째", "12번째"],
+      answer: "6번째",
+      difficulty: "medium"
+    },
+    {
+      question: "올림픽에서 체조 경기의 남자 종목 중 하나로, 두 개의 바를 사용하는 경기는 무엇인가요?",
+      options: ["평행봉", "철봉", "도마", "마루"],
+      answer: "평행봉",
+      difficulty: "medium"
+    },
+    //hard
+    {
+      question: "축구에서 FIFA가 오프사이드 규칙을 수정하여 '수동적 오프사이드' 개념을 명확히 한 연도는 언제인가요?",
+      options: ["1990년", "2005년", "2013년", "2018년"],
+      answer: "2005년",
+      difficulty: "hard"
+    },
+    {
+      question: "농구에서 NBA 역사상 단일 경기 최다 어시스트 기록을 보유한 선수는 누구인가요?",
+      options: ["매직 존슨", "존 스탁턴", "스코티 핍펀", "크리스 폴"],
+      answer: "스코티 핍펀",
+      difficulty: "hard"
+    },
+    {
+      question: "테니스에서 그랜드슬램 단식 타이틀을 가장 많이 획득한 여자 선수는 누구인가요?",
+      options: ["세리나 윌리엄스", "마거릿 코트", "슈테피 그라프", "마르티나 나브라틸로바"],
+      answer: "마거릿 코트",
+      difficulty: "hard"
+    },
+    {
+      question: "야구에서 MLB 역사상 한 시즌 최다 세이브 기록을 보유한 투수는 누구인가요?",
+      options: ["마리아노 리베라", "프란시스코 로드리게스", "트레버 호프먼", "빌리 와그너"],
+      answer: "프란시스코 로드리게스",
+      difficulty: "hard"
+    },
+    {
+      question: "수영에서 올림픽 남자 100m 자유형에서 47초대의 기록을 처음 세운 선수는 누구인가요?",
+      options: ["마이클 펠프스", "세자르 시엘루", "알랭 베르나르", "케이леб 드레셀"],
+      answer: "세자르 시엘루",
+      difficulty: "hard"
+    },
+    {
+      question: "올림픽 역사상 하계 올림픽과 동계 올림픽에서 모두 메달을 획득한 유일한 선수는 누구인가요?",
+      options: ["에디 이건", "클라라 휴스", "크리스토프 비겐", "올레 에이나르 비에른달렌"],
+      answer: "에디 이건",
+      difficulty: "hard"
+    },
+    {
+      question: "배구에서 국제 경기에서 리베로 선수가 착용하는 유니폼 색상은 일반적으로 무엇과 달라야 하나요?",
+      options: ["코트 색상", "팀 유니폼 색상", "심판 유니폼 색상", "관중 색상"],
+      answer: "팀 유니폼 색상",
+      difficulty: "hard"
+    },
+    {
+      question: "탁구에서 ITTF가 공식 경기용 공의 직경을 38mm에서 40mm로 변경한 연도는 언제인가요?",
+      options: ["1995년", "2000년", "2005년", "2010년"],
+      answer: "2000년",
+      difficulty: "hard"
+    },
+    {
+      question: "아이스하키에서 NHL 역사상 한 시즌 최다 골 기록을 보유한 선수는 누구인가요?",
+      options: ["웨인 그레츠키", "마이크 보시", "브렛 헐", "마리오 르뮤"],
+      answer: "웨인 그레츠키",
+      difficulty: "hard"
+    },
+    {
+      question: "골프에서 메이저 대회 중 ‘마스터스’가 열리는 골프 코스의 이름은 무엇인가요?",
+      options: ["페블 비치", "오거스타 내셔널", "세인트 앤드류스", "무이필드"],
+      answer: "오거스타 내셔널",
+      difficulty: "hard"
+    },
+    {
+      question: "FIFA 월드컵에서 단일 대회 최다 골 기록을 보유한 선수는 누구인가요?",
+      options: ["펠레", "게르트 뮐러", "주스트 퐁텐", "로날두"],
+      answer: "주스트 퐁텐",
+      difficulty: "hard"
+    },
+    {
+      question: "테니스에서 한 선수가 모든 그랜드슬램 대회를 같은 해에 우승한 것을 무엇이라고 하나요?",
+      options: ["골든 슬램", "캘린더 슬램", "그랜드 슬램", "퍼펙트 슬램"],
+      answer: "캘린더 슬램",
+      difficulty: "hard"
+    },
+    {
+      question: "야구에서 MLB 역사상 한 경기에서 4홈런을 기록한 최초의 선수는 누구인가요?",
+      options: ["베이브 루스", "루 게릭", "바비 로우", "윌리 메이스"],
+      answer: "바비 로우",
+      difficulty: "hard"
+    },
+    {
+      question: "수영에서 올림픽 혼계영 릴레이에서 첫 번째 영법은 무엇인가요?",
+      options: ["자유형", "배영", "평영", "접영"],
+      answer: "배영",
+      difficulty: "hard"
+    },
+    {
+      question: "농구에서 NBA 파이널 MVP 상을 가장 많이 수상한 선수는 누구인가요?",
+      options: ["마이클 조던", "레브론 제임스", "매직 존슨", "코비 브라이언트"],
+      answer: "마이클 조던",
+      difficulty: "hard"
+    },
+    {
+      question: "올림픽에서 펜싱 종목 중 에페와 플뢰레를 제외한 세 번째 종목은 무엇인가요?",
+      options: ["사브르", "랩이어", "커틀러스", "듀얼"],
+      answer: "사브르",
+      difficulty: "hard"
+    },
+    {
+      question: "배드민턴에서 셔틀콕의 공식 무게는 몇 그램인가요?",
+      options: ["4.74~5.50그램", "5.50~6.25그램", "6.25~7.00그램", "7.00~7.75그램"],
+      answer: "4.74~5.50그램",
+      difficulty: "hard"
+    },
+    {
+      question: "권투에서 올림픽 금메달을 획득한 후 프로 세계 챔피언이 된 최초의 한국 선수는 누구인가요?",
+      options: ["김기수", "홍수환", "유제두", "최요삼"],
+      answer: "홍수환",
+      difficulty: "hard"
+    },
+    {
+      question: "축구에서 UEFA 챔피언스 리그 역사상 한 시즌 최다 골 기록을 보유한 선수는 누구인가요?",
+      options: ["리오넬 메시", "크리스티아누 호날두", "라울", "로베르트 레반도프스키"],
+      answer: "크리스티아누 호날두",
+      difficulty: "hard"
+    },
+    {
+      question: "테니스에서 윔블던 단식 우승자가 받는 트로피의 이름은 무엇인가요?",
+      options: ["챌린지 컵", "비너스 로즈워터 디시", "노먼 브룩스 챌린지 컵", "대비너스 트로피"],
+      answer: "비너스 로즈워터 디시",
+      difficulty: "hard"
+    },
+    {
+      question: "아이스하키에서 NHL 플레이오프 우승 팀이 받는 트로피는 무엇인가요?",
+      options: ["캘더 컵", "스탠리 컵", "프레지던츠 트로피", "콘 스마이스 트로피"],
+      answer: "스탠리 컵",
+      difficulty: "hard"
+    },
+    {
+      question: "골프에서 PGA 투어 역사상 한 시즌 최다 우승 기록을 보유한 선수는 누구인가요?",
+      options: ["타이거 우즈", "벤 호건", "바이런 넬슨", "잭 니클라우스"],
+      answer: "바이런 넬슨",
+      difficulty: "hard"
+    },
+    {
+      question: "배구에서 국제 경기에서 한 팀이 한 세트에서 요청할 수 있는 최대 교체 횟수는 몇 번인가요?",
+      options: ["4번", "6번", "8번", "10번"],
+      answer: "6번",
+      difficulty: "hard"
+    },
+    {
+      question: "탁구에서 국제 대회에서 사용되는 공의 색상은 무엇인가요?",
+      options: ["흰색 또는 주황색", "흰색 또는 빨간색", "흰색 또는 파란색", "흰색 또는 검정색"],
+      answer: "흰색 또는 주황색",
+      difficulty: "hard"
+    },
+    {
+      question: "스키 알파인 경기에서 가장 빠른 속도를 기록하는 종목은 무엇인가요?",
+      options: ["활강", "슈퍼대회전", "대회전", "회전"],
+      answer: "활강",
+      difficulty: "hard"
+    },
+    {
+      question: "농구에서 NBA 역사상 한 경기 최다 리바운드 기록을 보유한 선수는 누구인가요?",
+      options: ["윌트 체임벌린", "빌 러셀", "데니스 로드먼", "샤킬 오닐"],
+      answer: "윌트 체임벌린",
+      difficulty: "hard"
+    },
+    {
+      question: "축구에서 월드컵 역사상 단일 경기 최다 관중 기록을 세운 경기는 어느 해의 결승전인가요?",
+      options: ["1950년", "1970년", "1986년", "2002년"],
+      answer: "1950년",
+      difficulty: "hard"
+    },
+    {
+      question: "테니스에서 그랜드슬램 대회 중 가장 긴 결승전(시간 기준)을 기록한 대회는 무엇인가요?",
+      options: ["2008년 윔블던", "2012년 호주 오픈", "2010년 프랑스 오픈", "2009년 US 오픈"],
+      answer: "2012년 호주 오픈",
+      difficulty: "hard"
+    },
+    {
+      question: "야구에서 MLB 역사상 한 시즌 최다 타점을 기록한 선수는 누구인가요?",
+      options: ["베이브 루스", "행크 애런", "해크 윌슨", "루 게릭"],
+      answer: "해크 윌슨",
+      difficulty: "hard"
+    },
+    {
+      question: "올림픽 체조에서 여자 종목 중 4개의 기구를 모두 포함하는 경기는 무엇인가요?",
+      options: ["개인종합", "단체종합", "기구별 결선", "마루운동"],
+      answer: "개인종합",
       difficulty: "hard"
     }
   ],
