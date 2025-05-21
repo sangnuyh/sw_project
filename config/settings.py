@@ -1,3 +1,8 @@
+# [파일 설명]
+# Django 프로젝트의 전체 설정을 담고 있음 (앱 등록, DB 설정, 템플릿 경로 등).
+# 주로 모든 코드가 따로 코드하지 않아도 생성시 나오는 코드로 이루어져 있습니다
+# 저는 따로 INSTALLED_APPS에 있는 accounts와 apps 파일을 써줬을 뿐입니다
+
 """
 Django settings for config project.
 
@@ -57,7 +62,7 @@ ROOT_URLCONF = 'config.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / 'templates'],
+        'DIRS': [BASE_DIR / "templates"],  # 추가 또는 유지
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -68,6 +73,8 @@ TEMPLATES = [
         },
     },
 ]
+STATIC_URL = '/static/'
+STATICFILES_DIRS = [BASE_DIR / "static"]
 
 WSGI_APPLICATION = 'config.wsgi.application'
 
@@ -101,6 +108,7 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+LOGOUT_REDIRECT_URL = '/'
 
 # Internationalization
 # https://docs.djangoproject.com/en/5.2/topics/i18n/

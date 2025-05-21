@@ -1,3 +1,6 @@
+# [파일 설명]
+# 사용자의 퀴즈 결과를 저장하는 QuizResult 모델 정의 파일.
+
 from django.db import models
 from django.contrib.auth.models import User
 

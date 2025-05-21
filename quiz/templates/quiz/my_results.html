@@ -11,7 +11,7 @@
         <ul>
             {% for r in results %}
                 <li>
-                    [{{ r.played_at|date:"Y-m-d H:i" }}] 
+                    [{{ r.played_at|date:"Y-m-d" }}] 
                     {{ r.category }} ({{ r.difficulty }}) - 
                     점수: {{ r.score }} / {{ r.total }}
                 </li>
@@ -21,6 +21,6 @@
         <p>아직 저장된 기록이 없습니다.</p>
     {% endif %}
 
-    <a href="{% url 'home' %}">홈으로</a>
+    <a href="http://127.0.0.1:8000">홈으로</a>
 </body>
 </html>

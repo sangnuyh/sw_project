@@ -1,3 +1,6 @@
+# [파일 설명]
+# 퀴즈 관련 API(결과 저장, 결과 조회 등)의 URL 패턴을 정의.
+
 # quiz/urls.py
 
 from django.urls import path

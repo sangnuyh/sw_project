@@ -1,5 +1,7 @@
 # accounts/forms.py
+# [파일 설명]
 # 한글화를 위한 코드
+# 사용자 입력을 위한 커스텀 폼을 정의하는 파일. (현재 기본 UserCreationForm 등 활용 가능)
 
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
