@@ -11,7 +11,7 @@
         <ul>
             {% for r in results %}
                 <li>
-                    [{{ r.played_at|date:"Y-m-d H:i" }}] 
+                    [{{ r.played_at|date:"Y-m-d" }}] 
                     {{ r.category }} ({{ r.difficulty }}) - 
                     점수: {{ r.score }} / {{ r.total }}
                 </li>

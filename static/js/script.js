@@ -3591,7 +3591,7 @@ const quizData = {
       difficulty: "easy"
     },
     {
-      question: "1920년대 이상재 등이 중심이 되어 고등 교육 실현을 위해 전개한 민족 운동은?",
+      question: "1920대 이상재 등이 중심이 되어 고등 교육 실현을 위해 전개한 민족 운동은?",
       options: ["새마을 운동", "물산 장려 운동", "민립 대학 설립 운동"],
       answer: "민립 대학 설립 운동",
       difficulty: "easy"
@@ -4610,25 +4610,47 @@ function showFinalResult() {
   menuBtn.style.display = "block";
 
   // DB에 결과 저장
-  fetch('/api/save-result', {
+  const formData = new FormData();
+  formData.append('category', currentCategory);
+  formData.append('difficulty', currentDifficulty);
+  formData.append('score', score);
+  formData.append('total', currentQuizData.length);
+
+  fetch('/quiz/save_result/', {
     method: 'POST',
+    body: formData,
     headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({
-      category: currentCategory,
-      difficulty: currentDifficulty,
-      score: score,
-      totalQuestions: currentQuizData.length
-    })
+      'X-CSRFToken': getCookie('csrftoken')
+    }
   })
-  .then(response => response.json())
+  .then(response => {
+    if (!response.ok) {
+      throw new Error('Network response was not ok');
+    }
+    return response.json();
+  })
   .then(data => {
     console.log('결과가 저장되었습니다:', data);
   })
   .catch(error => {
     console.error('결과 저장 중 오류 발생:', error);
   });
+}
+
+// CSRF 토큰을 가져오는 함수
+function getCookie(name) {
+  let cookieValue = null;
+  if (document.cookie && document.cookie !== '') {
+    const cookies = document.cookie.split(';');
+    for (let i = 0; i < cookies.length; i++) {
+      const cookie = cookies[i].trim();
+      if (cookie.substring(0, name.length + 1) === (name + '=')) {
+        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+        break;
+      }
+    }
+  }
+  return cookieValue;
 }
 
 menuBtn.addEventListener('click', () => {
