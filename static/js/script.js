@@ -4608,6 +4608,27 @@ function showFinalResult() {
   resultEl.innerText = `훌륭해요! ${categoryNames[currentCategory]} 퀴즈 (${getDifficultyText(currentDifficulty)}) 에서 총 ${currentQuizData.length}문제 중 ${score}문제를 맞추셨어요. \n 계속 도전해보세요!`;
   nextBtn.style.display = "none";
   menuBtn.style.display = "block";
+
+  // DB에 결과 저장
+  fetch('/api/save-result', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      category: currentCategory,
+      difficulty: currentDifficulty,
+      score: score,
+      totalQuestions: currentQuizData.length
+    })
+  })
+  .then(response => response.json())
+  .then(data => {
+    console.log('결과가 저장되었습니다:', data);
+  })
+  .catch(error => {
+    console.error('결과 저장 중 오류 발생:', error);
+  });
 }
 
 menuBtn.addEventListener('click', () => {
