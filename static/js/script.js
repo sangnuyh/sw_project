@@ -1476,7 +1476,7 @@ const quizData = {
       difficulty: "medium"
     },
     {
-      question: "김소월의 시 '진달래꽃'의 화자가 떠나는 연인에게 바라는 것은 무엇인가요?",
+      question: "김소월의 시 '진달래꽃'에서 화자가 떠나는 연인에게 바라는 것은 무엇인가요?",
       options: ["복수", "재회", "행복", "고통"],
       answer: "행복",
       difficulty: "medium"
@@ -4590,7 +4590,6 @@ function selectAnswer(selectedOption, clickedBtn) {
 function clearState() {
   resultEl.innerText = "";
   nextBtn.style.display = "none";
-  menuBtn.style.display = "none";
   optionsEl.innerHTML = "";
 }
 
@@ -4612,6 +4611,15 @@ function showFinalResult() {
 }
 
 menuBtn.addEventListener('click', () => {
+  // 현재 상태 초기화
+  clearState();
+  currentQuiz = 0;
+  score = 0;
+  
+  // 퀴즈 컨테이너 숨기기
   quizContainer.style.display = 'none';
+  
+  // 카테고리 선택 화면 표시
   categoryContainer.style.display = 'block';
+  difficultyContainer.style.display = 'none';
 });
