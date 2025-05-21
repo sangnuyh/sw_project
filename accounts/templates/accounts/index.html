@@ -1,7 +1,7 @@
  {% load static %}
 <!DOCTYPE html>
 <html lang="ko">
-<head>
+<head> 
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>종합 퀴즈</title>
@@ -33,9 +33,16 @@
         <p>카테고리를 선택해 주세요!</p>
       </div>
       <section id="categories">
-        <button class="catBtn" data-cat="history">역사</button>
         <button class="catBtn" data-cat="it">IT</button>
         <button class="catBtn" data-cat="sports">스포츠</button>
+
+        <button class="catBtn" data-cat="literature">문학</button>
+        <button class="catBtn" data-cat="art">예술</button>
+
+        <button class="catBtn" data-cat="economy">경제</button>
+        <button class="catBtn" data-cat="proverb">속담/사자성어</button>
+
+        <button class="catBtn" data-cat="history">역사</button>
         <button class="catBtn" data-cat="commonSense">상식</button>
       </section>
     </div>
@@ -67,7 +74,7 @@
       </section>
       <footer>
         <button id="nextBtn" class="actionBtn">다음 문제</button>
-        <button id="menuBtn" class="actionBtn" style="display:none;">메인 메뉴로 돌아가기</button>
+        <button id="menuBtn" class="actionBtn" style="display:none;">메인 메뉴</button>
       </footer>
     </div>
   </main>
