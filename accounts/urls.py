@@ -6,8 +6,8 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
-    path('signup/', views.signup, name='signup'),
+    path('', views.index, name='index'),
     path('login/', views.login_view, name='login'),
     path('logout/', views.logout_view, name='logout'),
-    path('home/', views.index, name='home'), # home URL이 index 뷰를 가리키도록 수정
+    path('signup/', views.signup_view, name='signup'),
 ]

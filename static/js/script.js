@@ -1651,7 +1651,7 @@ const quizData = {
     },
     {
       question: "안동 태사묘가 세워진 왕건의 업적으로 옳은 것은?",
-      options: ["한양을 남경으로 승격했다", "정계와 계백료서를 지어 관리의 규범을 제시했다", "쌍기의 건의를 받아들여 과거제를 실시했다"],
+      options: ["한양을 남경으로 승격했다", "정계와 계백료서를 지어 관리의 규범을 제시했다", "쌍기의 건의를 받아 과거제를 실시했다"],
       answer: "정계와 계백료서를 지어 관리의 규범을 제시했다",
       difficulty: "hard"
     },
@@ -2432,12 +2432,15 @@ function loadQuiz() {
 function selectAnswer(selectedOption, clickedBtn) {
   clickedBtn.classList.add('selected');
   const currentData = currentQuizData[currentQuiz];
-  if (selectedOption === currentData.answer) {
+  const isCorrect = selectedOption === currentData.answer;
+  
+  if (isCorrect) {
     score++;
     resultEl.innerText = "정답입니다!";
   } else {
     resultEl.innerText = `오답입니다! 정답은: ${currentData.answer}`;
   }
+
   Array.from(optionsEl.children).forEach(li => {
     li.firstChild.disabled = true;
   });
@@ -2447,7 +2450,7 @@ function selectAnswer(selectedOption, clickedBtn) {
 function clearState() {
   resultEl.innerText = "";
   nextBtn.style.display = "none";
-  menuBtn.style.display = "none";
+
   optionsEl.innerHTML = "";
 }
 
