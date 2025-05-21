@@ -815,7 +815,7 @@ const quizData = {
       difficulty: "easy"
     },
     {
-      question: "권투 경기가 진행되는 장소는 무엇이라 하나요?",
+      question: "권투 경기가 진행되는 장소는 무엇이라고 하나요?",
       options: ["코트", "링", "필드", "트랙"],
       answer: "링",
       difficulty: "easy"
@@ -1153,9 +1153,9 @@ const quizData = {
       difficulty: "hard"
     },
     {
-      question: "올림픽 체조에서 여자 종목 중 4개의 기구를 모두 포함하는 경기는 무엇인가요?",
-      options: ["개인종합", "단체종합", "기구별 결선", "마루운동"],
-      answer: "개인종합",
+      question: "올림픽에서 펜싱 종목 중 에페와 플뢰레를 제외한 세 번째 종목은 무엇인가요?",
+      options: ["사브르", "랩이어", "커틀러스", "듀얼"],
+      answer: "사브르",
       difficulty: "hard"
     },
     {
@@ -2627,13 +2627,7 @@ const quizData = {
       difficulty: "medium"
     },
     {
-      question: "경기가 나쁠 때 기업이 가장 먼저 줄이는 비용은 무엇인가요?",
-      options: ["세금", "광고비", "인건비", "공공요금"],
-      answer: "인건비",
-      difficulty: "medium"
-    },
-    {
-      question: "경기 활동이 줄어드는 시기를 무엇이라 하나요?",
+      question: "경제 활동이 줄어드는 시기를 무엇이라 하나요?",
       options: ["경기확장기", "경기침체기", "회복기", "호황기"],
       answer: "경기침체기",
       difficulty: "medium"
@@ -2821,7 +2815,7 @@ const quizData = {
     },
     {
       question: "경상수지가 지속적인 적자를 기록할 경우 발생할 수 있는 경제적 문제는 무엇인가요?",
-      options: ["외환위기와 통화 가치 하락", "소비자 신뢰의 즉각적 회복", "무역흑자의 구조적 확대", "생산성의 지속적 향상"],
+      options: ["외환위기와 통화 가치 하락", "소비자 신뢰의 즉각적 회복", "무역흑자의 구조적 증가", "생산성의 지속적 향상"],
       answer: "외환위기와 통화 가치 하락",
       difficulty: "hard"
     },
@@ -3840,7 +3834,7 @@ const quizData = {
     },
     {
       question: "안동 태사묘가 세워진 왕건의 업적으로 옳은 것은?",
-      options: ["한양을 남경으로 승격했다", "정계와 계백료서를 지어 관리의 규범을 제시했다", "쌍기의 건의를 받아 과거제를 실시했다"],
+      options: ["한양을 남경으로 승격했다", "정계와 계백료서를 지어 관리의 규범을 제시했다", "쌍기의 건의를 받아들여 과거제를 실시했다"],
       answer: "정계와 계백료서를 지어 관리의 규범을 제시했다",
       difficulty: "hard"
     },
@@ -4575,23 +4569,18 @@ function loadQuiz() {
       li.appendChild(btn);
       optionsEl.appendChild(li);
     });
-    // 퀴즈 진행 중에도 메인 메뉴 버튼 표시
-    menuBtn.style.display = "block";
   }
 }
 
 function selectAnswer(selectedOption, clickedBtn) {
   clickedBtn.classList.add('selected');
   const currentData = currentQuizData[currentQuiz];
-  const isCorrect = selectedOption === currentData.answer;
-  
-  if (isCorrect) {
+  if (selectedOption === currentData.answer) {
     score++;
     resultEl.innerText = "정답입니다!";
   } else {
     resultEl.innerText = `오답입니다! 정답은: ${currentData.answer}`;
   }
-
   Array.from(optionsEl.children).forEach(li => {
     li.firstChild.disabled = true;
   });
@@ -4601,10 +4590,9 @@ function selectAnswer(selectedOption, clickedBtn) {
 function clearState() {
   resultEl.innerText = "";
   nextBtn.style.display = "none";
-
+  menuBtn.style.display = "none";
   optionsEl.innerHTML = "";
 }
-
 
 nextBtn.addEventListener('click', () => {
   currentQuiz++;
@@ -4624,17 +4612,6 @@ function showFinalResult() {
 }
 
 menuBtn.addEventListener('click', () => {
-  // 모든 컨테이너 숨기기
   quizContainer.style.display = 'none';
-  difficultyContainer.style.display = 'none';
-  
-  // 카테고리 컨테이너 표시
   categoryContainer.style.display = 'block';
-  
-  // 상태 초기화
-  currentQuiz = 0;
-  score = 0;
-  currentCategory = '';
-  currentDifficulty = '';
-  clearState();
 });

@@ -5,9 +5,9 @@
 from django.urls import path
 from . import views
 
-app_name = 'accounts'
-
 urlpatterns = [
+    path('signup/', views.signup, name='signup'),
     path('login/', views.login_view, name='login'),
     path('logout/', views.logout_view, name='logout'),
+    path('home/', views.index, name='home'), # home URL이 index 뷰를 가리키도록 수정
 ]
