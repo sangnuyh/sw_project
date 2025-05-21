@@ -2454,6 +2454,7 @@ function clearState() {
   optionsEl.innerHTML = "";
 }
 
+
 nextBtn.addEventListener('click', () => {
   currentQuiz++;
   if (currentQuiz < currentQuizData.length) {
