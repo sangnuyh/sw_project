@@ -1,7 +1,7 @@
  {% load static %}
 <!DOCTYPE html>
 <html lang="ko">
-<head>
+<head> 
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>종합 퀴즈</title>
@@ -13,6 +13,7 @@
   <div class="loginDivPa">
     {% if request.user.is_authenticated %}
       <div class="loginDivCh welcomeMsg">{{ request.user.username }}님 환영합니다!</div>
+      <a class ="loginDivCh" href="quiz/my_results">내 기록 조회</a>
       <div class="loginDivCh logout"><a href="{% url 'logout' %}">로그아웃</a></div>
     {% else %}
       <div class="loginDivCh login"><a href="{% url 'login' %}">로그인</a></div>
@@ -21,6 +22,7 @@
   </div>
   <div class="settings-button" onclick="toggleSettings()">⚙️</div>
   </header>
+
 
     <!-- 설정 패널 -->
   <div class="settings-panel" id="settingsPanel">
@@ -47,6 +49,7 @@
   <audio id="bgmPlayer" src="{% static 'audio/bgm1.mp3' %}" autoplay loop></audio>
   <audio id="sfxPlayer" src="{% static 'audio/click.mp3' %}"></audio>
 
+
   <main>
     <!-- 카테고리 선택 화면 -->
     <div id="categoryContainer" class="container">
@@ -55,10 +58,20 @@
         <p>카테고리를 선택해 주세요!</p>
       </div>
       <section id="categories">
-        <button class="catBtn" data-cat="history">역사</button>
         <button class="catBtn" data-cat="it">IT</button>
         <button class="catBtn" data-cat="sports">스포츠</button>
+
+        <button class="catBtn" data-cat="literature">문학</button>
+        <button class="catBtn" data-cat="art">예술</button>
+
+        <button class="catBtn" data-cat="economy">경제</button>
+        <button class="catBtn" data-cat="proverb">속담/사자성어</button>
+
+        <button class="catBtn" data-cat="history">역사</button>
         <button class="catBtn" data-cat="commonSense">상식</button>
+
+
+        <button class="catBtn" onclick="window.location.href='user_quizzes'">다른 사용자 문제</button>
       </section>
     </div>
 
@@ -89,7 +102,7 @@
       </section>
       <footer>
         <button id="nextBtn" class="actionBtn">다음 문제</button>
-        <button id="menuBtn" class="actionBtn" style="display:none;">메인 메뉴로 돌아가기</button>
+        <button id="menuBtn" class="actionBtn">메인 메뉴</button>
       </footer>
     </div>
   </main>
