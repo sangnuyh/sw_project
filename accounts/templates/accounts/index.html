@@ -20,7 +20,34 @@
       <div class="loginDivCh joinMember"><a href="{% url 'signup' %}">회원가입</a></div>
     {% endif %}
   </div>
+  <div class="settings-button" onclick="toggleSettings()">⚙️</div>
   </header>
+
+
+    <!-- 설정 패널 -->
+  <div class="settings-panel" id="settingsPanel">
+    <h3>🔧 설정</h3>
+    <div class="setting-item">
+      <label>BGM 볼륨 🎵</label>
+      <input type="range" id="bgmVolume" min="0" max="1" step="0.01">
+    </div>
+    <div class="setting-item">
+      <label>효과음 볼륨 🎧</label>
+      <input type="range" id="sfxVolume" min="0" max="1" step="0.01">
+    </div>
+    <div class="setting-item">
+      <label>BGM 종류</label>
+      <select id="bgmSelector">
+        <option value="bgm1.mp3">기본 음악</option>
+        <option value="bgm2.mp3">신나는 음악</option>
+        <option value="bgm3.mp3">집중용 음악</option>
+      </select>
+    </div>
+  </div>
+
+  <!-- BGM & 효과음 오디오 -->
+  <audio id="bgmPlayer" src="{% static 'audio/bgm1.mp3' %}" autoplay loop></audio>
+  <audio id="sfxPlayer" src="{% static 'audio/click.mp3' %}"></audio>
 
 
   <main>
@@ -79,6 +106,68 @@
       </footer>
     </div>
   </main>
+
+    <script>
+    const bgmPlayer = document.getElementById('bgmPlayer');
+    const sfxPlayer = document.getElementById('sfxPlayer');
+    const bgmVolume = document.getElementById('bgmVolume');
+    const sfxVolume = document.getElementById('sfxVolume');
+    const bgmSelector = document.getElementById('bgmSelector');
+    const settingsPanel = document.getElementById('settingsPanel');
+
+    function toggleSettings() {
+      settingsPanel.classList.toggle('visible');
+    }
+
+    bgmVolume.addEventListener('input', () => {
+      bgmPlayer.volume = bgmVolume.value;
+    });
+
+    sfxVolume.addEventListener('input', () => {
+      sfxPlayer.volume = sfxVolume.value;
+    });
+
+    bgmSelector.addEventListener('change', () => {
+      bgmPlayer.src = `{% static 'audio/' %}` + bgmSelector.value;
+      bgmPlayer.play();
+    });
+
+    // 버튼 효과음 적용 예시
+    document.querySelectorAll('button').forEach(btn => {
+      btn.addEventListener('click', () => {
+        sfxPlayer.currentTime = 0;
+        sfxPlayer.play();
+      });
+    });
+  </script>
+
+  <style>
+    .settings-button {
+      position: absolute;
+      right: 1rem;
+      top: 1rem;
+      font-size: 1.5rem;
+      cursor: pointer;
+    }
+    .settings-panel {
+      position: absolute;
+      right: 1rem;
+      top: 3.5rem;
+      background: white;
+      border-radius: 8px;
+      padding: 1rem;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+      width: 200px;
+      display: none;
+      z-index: 10;
+    }
+    .settings-panel.visible {
+      display: block;
+    }
+    .setting-item {
+      margin-bottom: 1rem;
+    }
+  </style>
 
 </body>
 </html>
