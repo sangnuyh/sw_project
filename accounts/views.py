@@ -38,3 +38,7 @@ def logout_view(request):
 def index(request):
     return render(request, 'accounts/index.html')
 
+@login_required
+def create_quiz(request):
+    return render(request, 'accounts/create_quiz.html')
+

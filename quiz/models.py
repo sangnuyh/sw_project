@@ -11,6 +11,9 @@ class QuizResult(models.Model):
     score = models.IntegerField()
     total = models.IntegerField()
     played_at = models.DateTimeField(auto_now_add=True)
+    question = models.TextField(default='')
+    user_answer = models.TextField(default='')
+    correct_answer = models.TextField(default='')
 
     def __str__(self):
         return f"{self.user.username} - {self.category} ({self.score}/{self.total})"
@@ -42,3 +45,38 @@ class Choice(models.Model):
 
     def __str__(self):
         return self.text
+
+class UserQuiz(models.Model):
+    DIFFICULTY_CHOICES = [
+        ('easy', '쉬움'),
+        ('medium', '보통'),
+        ('hard', '어려움'),
+    ]
+    
+    CATEGORY_CHOICES = [
+        ('it', 'IT'),
+        ('sports', '스포츠'),
+        ('literature', '문학'),
+        ('art', '예술'),
+        ('economy', '경제'),
+        ('proverb', '속담/사자성어'),
+        ('history', '역사'),
+        ('commonSense', '상식'),
+    ]
+
+    creator = models.ForeignKey(User, on_delete=models.CASCADE, related_name='created_quizzes')
+    category = models.CharField(max_length=20, choices=CATEGORY_CHOICES)
+    difficulty = models.CharField(max_length=10, choices=DIFFICULTY_CHOICES)
+    question = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.creator.username}의 {self.get_category_display()} 문제"
+
+class UserQuizOption(models.Model):
+    quiz = models.ForeignKey(UserQuiz, on_delete=models.CASCADE, related_name='options')
+    content = models.TextField()
+    is_correct = models.BooleanField(default=False)
+
+    def __str__(self):
+        return f"{self.quiz.question}의 보기: {self.content}"

@@ -71,7 +71,7 @@
         <button class="catBtn" data-cat="commonSense">상식</button>
 
 
-        <button class="catBtn" onclick="window.location.href='user_quizzes'">다른 사용자 문제</button>
+        <button class="catBtn" id="userQuizzesBtn">다른 사용자 문제</button>
       </section>
     </div>
 
@@ -138,6 +138,10 @@
         sfxPlayer.currentTime = 0;
         sfxPlayer.play();
       });
+    });
+
+    document.getElementById('userQuizzesBtn').addEventListener('click', function() {
+        window.location.href = "{% url 'user_quizzes' %}";
     });
   </script>
 
