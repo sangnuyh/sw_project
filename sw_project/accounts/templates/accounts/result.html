@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>퀴즈 결과</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}" />
+  </head>
+  <body onload="confettiLaunch()">
+    <div class="main-container">
+      <h1>🎉 퀴즈 결과</h1>
+      <p class="score">
+        총 <strong>10문제</strong> 중 <strong>8문제</strong> 맞췄어요!
+      </p>
+      <p class="level">난이도: <strong>보통</strong></p>
+
+      <div
+        class="buttons"
+        style="
+          margin-top: 2rem;
+          display: flex;
+          gap: 1rem;
+          justify-content: center;
+        "
+      >
+        <button onclick="location.href='/start'">처음으로</button>
+        <button onclick="location.href='/ranking'">랭킹 확인</button>
+      </div>
+    </div>
+
+    <!-- 폭죽 효과 라이브러리 -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+    <!-- 진입 시 폭죽 실행 -->
+    <script>
+      function confettiLaunch() {
+        confetti({
+          particleCount: 200,
+          spread: 100,
+          origin: { y: 0.6 },
+        });
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>내 퀴즈 기록</title>
+</head>
+<body>
+    <h1>{{ user.username }}님의 퀴즈 기록</h1>
+
+    {% if results %}
+        <ul>
+            {% for r in results %}
+                <li>
+                    [{{ r.played_at|date:"Y-m-d" }}] 
+                    {{ r.category }} ({{ r.difficulty }}) - 
+                    점수: {{ r.score }} / {{ r.total }}
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>아직 저장된 기록이 없습니다.</p>
+    {% endif %}
+
+    <a href="http://127.0.0.1:8000">홈으로</a>
+</body>
+</html>
