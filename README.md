@@ -1,8 +1,27 @@
-각 폴더에 대한 주석 + login, signup ← html 코드 변경
+### 🎯 종합 퀴즈 웹 서비스
 
-[login]
- - 아이디, 비밀번호 입력
- - 로그인 버튼 + 회원가입으로 이동할 수 있는 버튼
+## 개요
+Django 기반의 카테고리별 퀴즈 시스템
 
-[signup]
- - 아이디 생성, 비밀번호 입력, 비밀번호 재입력
+## 주요 기능
+- 회원가입 및 로그인
+- 카테고리/난이도 기반 문제
+- 퀴즈 결과 저장 및 기록 확인
+- 사용자 설정 (BGM, 효과음)
+- 사용자 지정 문제 모드
+
+## 팀원
+| 이름 | 역할 |
+|------|------|
+| 남상현 | JS 로직, 문제 구성 |
+| 심지승 | DB, 회원/결과 기능 |
+| 최예도 | 디자인 및 UI |
+| 이연주 | 관리자 기능, 발표 |
+
+## 실행 방법
+```bash
+git clone ...
+cd sw_project
+pip install -r requirements.txt
+python manage.py migrate
+python manage.py runserver
