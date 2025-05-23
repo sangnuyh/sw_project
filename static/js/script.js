@@ -4522,20 +4522,19 @@ document.querySelectorAll('.catBtn').forEach(btn => {
 
 // 난이도 버튼 클릭 시 (난이도 선택 화면 사라지고, 해당 난이도 문제만 필터링)
 document.querySelectorAll('.difficultyBtn').forEach(btn => {
-  btn.addEventListener('click', () => {
-    currentDifficulty = btn.getAttribute('data-difficulty');
-    difficultyContainer.style.display = 'none';
-    quizContainer.style.display = 'block';
-    quizTitle.innerText = `${categoryNames[currentCategory]} 퀴즈  (${getDifficultyText(currentDifficulty)})`;
-    // 선택된 난이도에 해당하는 문제만 필터링하여 currentQuizData에 저장
-    currentQuizData = shuffleArray(
-      quizData[currentCategory].filter(q => q.difficulty === currentDifficulty)
-    );
-    currentQuiz = 0;
-    score = 0;
-    loadQuiz();
+    btn.addEventListener('click', () => {
+      currentDifficulty = btn.getAttribute('data-difficulty');
+      difficultyContainer.style.display = 'none';
+      quizContainer.style.display = 'block';
+      quizTitle.innerText = `${categoryNames[currentCategory]} 퀴즈  (${getDifficultyText(currentDifficulty)})`;
+      // 선택된 난이도에 해당하는 문제만 필터링 후 10문제만 랜덤으로 출제
+      const filteredQuestions = quizData[currentCategory].filter(q => q.difficulty === currentDifficulty);
+      currentQuizData = shuffleArray(filteredQuestions).slice(0, 10);
+      currentQuiz = 0;
+      score = 0;
+      loadQuiz();
+    });
   });
-});
 
 // 난이도 텍스트 반환 함수
 function getDifficultyText(diff) {
@@ -4573,19 +4572,50 @@ function loadQuiz() {
 }
 
 function selectAnswer(selectedOption, clickedBtn) {
-  clickedBtn.classList.add('selected');
-  const currentData = currentQuizData[currentQuiz];
-  if (selectedOption === currentData.answer) {
-    score++;
-    resultEl.innerText = "정답입니다!";
-  } else {
-    resultEl.innerText = `오답입니다! 정답은: ${currentData.answer}`;
+    clickedBtn.classList.add('selected');
+    const currentData = currentQuizData[currentQuiz];
+    const isCorrect = selectedOption === currentData.answer;
+    
+    if (isCorrect) {
+      score++;
+      resultEl.innerText = "정답입니다!";
+    } else {
+      resultEl.innerText = `오답입니다! 정답은: ${currentData.answer}`;
+    }
+  
+    // 현재 문제의 결과를 저장
+    const data = {
+      category: categoryNames[currentCategory],
+      difficulty: getDifficultyText(currentDifficulty),
+      score: isCorrect ? 1 : 0,
+      total: 1,
+      question: currentData.question,
+      user_answer: selectedOption,
+      correct_answer: currentData.answer
+    };
+  
+    // 서버에 결과 저장
+    fetch('/quiz/save_result/', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-CSRFToken': getCookie('csrftoken')
+      },
+      body: JSON.stringify(data)
+    })
+    .then(response => response.json())
+    .then(data => {
+      console.log('결과 저장 응답:', data);
+    })
+    .catch(error => {
+      console.error('결과 저장 중 오류 발생:', error);
+    });
+  
+    Array.from(optionsEl.children).forEach(li => {
+      li.firstChild.disabled = true;
+    });
+    nextBtn.style.display = "block";
   }
-  Array.from(optionsEl.children).forEach(li => {
-    li.firstChild.disabled = true;
-  });
-  nextBtn.style.display = "block";
-}
 
 function clearState() {
   resultEl.innerText = "";

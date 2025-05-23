@@ -13,18 +13,40 @@ import json
 def save_quiz_result(request):
     if request.method == 'POST':
         try:
-            category = request.POST.get('category')
-            difficulty = request.POST.get('difficulty')
-            score = int(request.POST.get('score'))
-            total = int(request.POST.get('total'))
+            print("\n=== 퀴즈 결과 저장 시작 ===")
+            data = json.loads(request.body)
+            print("받은 데이터:", data)
+            
+            category = data.get('category')
+            difficulty = data.get('difficulty')
+            score = int(data.get('score'))
+            total = int(data.get('total'))
+            question = data.get('question', '')
+            user_answer = data.get('user_answer', '')
+            correct_answer = data.get('correct_answer', '')
+
+            print("\n저장할 데이터 상세:")
+            print(f"카테고리: {category}")
+            print(f"난이도: {difficulty}")
+            print(f"점수: {score}")
+            print(f"총 문제 수: {total}")
+            print(f"문제: {question}")
+            print(f"사용자 답변: {user_answer}")
+            print(f"정답: {correct_answer}")
 
             quiz_result = QuizResult.objects.create(
                 user=request.user,
                 category=category,
                 difficulty=difficulty,
                 score=score,
-                total=total
+                total=total,
+                question=question,
+                user_answer=user_answer,
+                correct_answer=correct_answer
             )
+
+            print(f"\n저장된 결과 ID: {quiz_result.id}")
+            print("=== 퀴즈 결과 저장 완료 ===\n")
 
             return JsonResponse({
                 'status': 'success',
@@ -32,6 +54,11 @@ def save_quiz_result(request):
                 'result_id': quiz_result.id
             })
         except Exception as e:
+            print("\n=== 퀴즈 결과 저장 실패 ===")
+            print(f"에러 발생: {str(e)}")
+            import traceback
+            print("상세 에러:", traceback.format_exc())
+            print("=== 퀴즈 결과 저장 실패 ===\n")
             return JsonResponse({
                 'status': 'error',
                 'message': str(e)
@@ -43,7 +70,19 @@ def save_quiz_result(request):
     
 @login_required
 def my_results(request):
+    print("=== 내 기록 조회 시작 ===")
     results = QuizResult.objects.filter(user=request.user).order_by('-played_at')
+    print(f"조회된 결과 수: {results.count()}")
+    for result in results:
+        print(f"결과 ID: {result.id}")
+        print(f"카테고리: {result.category}")
+        print(f"난이도: {result.difficulty}")
+        print(f"문제: {result.question}")
+        print(f"사용자 답변: {result.user_answer}")
+        print(f"정답: {result.correct_answer}")
+        print(f"점수: {result.score}")
+        print("---")
+    print("=== 내 기록 조회 완료 ===")
     return render(request, 'quiz/my_results.html', {'results': results})
 
 @login_required
