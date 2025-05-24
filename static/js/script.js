@@ -4542,7 +4542,6 @@ document.querySelectorAll('.difficultyBtn').forEach(btn => {
 
     loadQuiz();
   });
-});
 
 // 난이도 텍스트 반환 함수
 function getDifficultyText(diff) {
@@ -4593,19 +4592,50 @@ function loadQuiz() {
 }
 
 function selectAnswer(selectedOption, clickedBtn) {
-  clickedBtn.classList.add('selected');
-  const currentData = currentQuizData[currentQuiz];
-  if (selectedOption === currentData.answer) {
-    score++;
-    resultEl.innerText = "정답입니다!";
-  } else {
-    resultEl.innerText = `오답입니다! 정답은: ${currentData.answer}`;
+    clickedBtn.classList.add('selected');
+    const currentData = currentQuizData[currentQuiz];
+    const isCorrect = selectedOption === currentData.answer;
+    
+    if (isCorrect) {
+      score++;
+      resultEl.innerText = "정답입니다!";
+    } else {
+      resultEl.innerText = `오답입니다! 정답은: ${currentData.answer}`;
+    }
+  
+    // 현재 문제의 결과를 저장
+    const data = {
+      category: categoryNames[currentCategory],
+      difficulty: getDifficultyText(currentDifficulty),
+      score: isCorrect ? 1 : 0,
+      total: 1,
+      question: currentData.question,
+      user_answer: selectedOption,
+      correct_answer: currentData.answer
+    };
+  
+    // 서버에 결과 저장
+    fetch('/quiz/save_result/', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-CSRFToken': getCookie('csrftoken')
+      },
+      body: JSON.stringify(data)
+    })
+    .then(response => response.json())
+    .then(data => {
+      console.log('결과 저장 응답:', data);
+    })
+    .catch(error => {
+      console.error('결과 저장 중 오류 발생:', error);
+    });
+  
+    Array.from(optionsEl.children).forEach(li => {
+      li.firstChild.disabled = true;
+    });
+    nextBtn.style.display = "block";
   }
-  Array.from(optionsEl.children).forEach(li => {
-    li.firstChild.disabled = true;
-  });
-  nextBtn.style.display = "block";
-}
 
 function clearState() {
   resultEl.innerText = "";
