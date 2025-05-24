@@ -1,3 +1,5 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="ko">
   <head>
@@ -7,7 +9,7 @@
     <link rel="stylesheet" href="{% static 'css/styles.css' %}" />
   </head>
   <body onload="confettiLaunch()">
-    <div class="main-container">
+    <div class="container">
       <h1>🎉 퀴즈 결과</h1>
       <p class="score">
         총 <strong>10문제</strong> 중 <strong>8문제</strong> 맞췄어요!

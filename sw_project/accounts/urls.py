@@ -10,4 +10,5 @@ urlpatterns = [
     path('login/', views.login_view, name='login'),
     path('logout/', views.logout_view, name='logout'),
     path('home/', views.index, name='home'), # home URL이 index 뷰를 가리키도록 수정
+    path('result/', views.result_page, name='result'),
 ]

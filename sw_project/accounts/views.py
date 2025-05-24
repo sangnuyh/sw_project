@@ -38,3 +38,7 @@ def logout_view(request):
 def index(request):
     return render(request, 'accounts/index.html')
 
+# 결과
+def result_page(request):
+    return render(request, 'accounts/result.html') 
+
