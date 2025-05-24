@@ -3,6 +3,7 @@
 
 # quiz/views.py
 
+from django.db.models import Max, Min #점수가 같을 시 시간순으로 정렬렬
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
@@ -14,25 +15,22 @@ def save_quiz_result(request):
     if request.method == 'POST':
         try:
             print("\n=== 퀴즈 결과 저장 시작 ===")
-            data = json.loads(request.body)
-            print("받은 데이터:", data)
-            
+
+            if request.content_type == 'application/json':
+                data = json.loads(request.body.decode('utf-8'))
+            else:
+                data = request.POST  # FormData는 여기서 처리
+
             category = data.get('category')
             difficulty = data.get('difficulty')
             score = int(data.get('score'))
             total = int(data.get('total'))
-            question = data.get('question', '')
+            question = data.get('question', '')  # 없으면 빈 문자열
             user_answer = data.get('user_answer', '')
             correct_answer = data.get('correct_answer', '')
+            duration = int(data.get('duration') or 0)
 
-            print("\n저장할 데이터 상세:")
-            print(f"카테고리: {category}")
-            print(f"난이도: {difficulty}")
-            print(f"점수: {score}")
-            print(f"총 문제 수: {total}")
-            print(f"문제: {question}")
-            print(f"사용자 답변: {user_answer}")
-            print(f"정답: {correct_answer}")
+            # 로그 출력 생략 가능
 
             quiz_result = QuizResult.objects.create(
                 user=request.user,
@@ -42,11 +40,9 @@ def save_quiz_result(request):
                 total=total,
                 question=question,
                 user_answer=user_answer,
-                correct_answer=correct_answer
+                correct_answer=correct_answer,
+                duration=duration
             )
-
-            print(f"\n저장된 결과 ID: {quiz_result.id}")
-            print("=== 퀴즈 결과 저장 완료 ===\n")
 
             return JsonResponse({
                 'status': 'success',
@@ -54,19 +50,13 @@ def save_quiz_result(request):
                 'result_id': quiz_result.id
             })
         except Exception as e:
-            print("\n=== 퀴즈 결과 저장 실패 ===")
-            print(f"에러 발생: {str(e)}")
             import traceback
+            print("=== 퀴즈 결과 저장 실패 ===")
+            print("에러 발생:", str(e))
             print("상세 에러:", traceback.format_exc())
-            print("=== 퀴즈 결과 저장 실패 ===\n")
-            return JsonResponse({
-                'status': 'error',
-                'message': str(e)
-            }, status=400)
-    return JsonResponse({
-        'status': 'error',
-        'message': '잘못된 요청입니다.'
-    }, status=400)
+            return JsonResponse({'status': 'error', 'message': str(e)}, status=400)
+
+    return JsonResponse({'status': 'error', 'message': '잘못된 요청입니다.'}, status=400)
     
 @login_required
 def my_results(request):
@@ -193,3 +183,47 @@ def submit_answer(request):
         except Exception as e:
             return JsonResponse({'error': str(e)}, status=400)
     return JsonResponse({'error': '잘못된 요청입니다.'}, status=400)
+
+def index_view(request):
+    return render(request, 'accounts/index.html')
+
+
+@login_required
+def ranking_view(request):
+    category = request.GET.get('category', 'it')
+    difficulty = request.GET.get('difficulty', 'easy')
+
+    top_scores = (
+        QuizResult.objects
+        .filter(category=category, difficulty=difficulty)
+        .annotate(
+            best_score=Max('score'),
+            best_time=Min('duration')  # 같은 점수일 때 빠른 사람
+        )
+        .order_by('-best_score', 'best_time')[:10]
+    )
+
+    CATEGORY_DISPLAY = {
+    'it': 'IT',
+    'history': '역사',
+    'sports': '스포츠',
+    'commonSense': '상식',
+    'proverb': '속담',
+    'literature' : '문학',
+    'art' : '예술',
+    'economy' : '경제'
+    }
+
+    DIFFICULTY_DISPLAY = {
+    'easy': '이지',
+    'medium': '노말',
+    'hard': '하드'
+    }
+
+    return render(request, 'quiz/ranking.html', {
+    'top_scores': top_scores,
+    'category': category,
+    'difficulty': difficulty,
+    'category_name': CATEGORY_DISPLAY.get(category, category),
+    'difficulty_name': DIFFICULTY_DISPLAY.get(difficulty, difficulty)
+})

@@ -14,6 +14,7 @@ class QuizResult(models.Model):
     question = models.TextField(default='')
     user_answer = models.TextField(default='')
     correct_answer = models.TextField(default='')
+    duration = models.IntegerField(null=True)
 
     def __str__(self):
         return f"{self.user.username} - {self.category} ({self.score}/{self.total})"
