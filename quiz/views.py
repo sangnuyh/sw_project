@@ -14,11 +14,23 @@ import json
 def save_quiz_result(request):
     if request.method == 'POST':
         try:
-            category = request.POST.get('category')
-            difficulty = request.POST.get('difficulty')
-            score = int(request.POST.get('score'))
-            total = int(request.POST.get('total'))
-            duration = int(request.POST.get('duration'))
+            print("\n=== 퀴즈 결과 저장 시작 ===")
+
+            if request.content_type == 'application/json':
+                data = json.loads(request.body.decode('utf-8'))
+            else:
+                data = request.POST  # FormData는 여기서 처리
+
+            category = data.get('category')
+            difficulty = data.get('difficulty')
+            score = int(data.get('score'))
+            total = int(data.get('total'))
+            question = data.get('question', '')  # 없으면 빈 문자열
+            user_answer = data.get('user_answer', '')
+            correct_answer = data.get('correct_answer', '')
+            duration = int(data.get('duration') or 0)
+
+            # 로그 출력 생략 가능
 
             quiz_result = QuizResult.objects.create(
                 user=request.user,
@@ -26,11 +38,11 @@ def save_quiz_result(request):
                 difficulty=difficulty,
                 score=score,
                 total=total,
+                question=question,
+                user_answer=user_answer,
+                correct_answer=correct_answer,
                 duration=duration
             )
-
-            print(f"\n저장된 결과 ID: {quiz_result.id}")
-            print("=== 퀴즈 결과 저장 완료 ===\n")
 
             return JsonResponse({
                 'status': 'success',
@@ -38,19 +50,13 @@ def save_quiz_result(request):
                 'result_id': quiz_result.id
             })
         except Exception as e:
-            print("\n=== 퀴즈 결과 저장 실패 ===")
-            print(f"에러 발생: {str(e)}")
             import traceback
+            print("=== 퀴즈 결과 저장 실패 ===")
+            print("에러 발생:", str(e))
             print("상세 에러:", traceback.format_exc())
-            print("=== 퀴즈 결과 저장 실패 ===\n")
-            return JsonResponse({
-                'status': 'error',
-                'message': str(e)
-            }, status=400)
-    return JsonResponse({
-        'status': 'error',
-        'message': '잘못된 요청입니다.'
-    }, status=400)
+            return JsonResponse({'status': 'error', 'message': str(e)}, status=400)
+
+    return JsonResponse({'status': 'error', 'message': '잘못된 요청입니다.'}, status=400)
     
 @login_required
 def my_results(request):

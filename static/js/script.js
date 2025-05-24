@@ -4530,18 +4530,21 @@ document.querySelectorAll('.difficultyBtn').forEach(btn => {
     difficultyContainer.style.display = 'none';
     quizContainer.style.display = 'block';
     quizTitle.innerText = `${categoryNames[currentCategory]} 퀴즈  (${getDifficultyText(currentDifficulty)})`;
-    // 선택된 난이도에 해당하는 문제만 필터링하여 currentQuizData에 저장
-    currentQuizData = shuffleArray(
-      quizData[currentCategory].filter(q => q.difficulty === currentDifficulty)
-    );
+
+    // 선택된 난이도 문제 필터링 후 10문제로 제한
+    const filteredQuestions = quizData[currentCategory].filter(q => q.difficulty === currentDifficulty);
+    currentQuizData = shuffleArray(filteredQuestions).slice(0, 10);
+
     currentQuiz = 0;
     score = 0;
 
-    startTime = new Date();  // 퀴즈 시작 시간 기록
+    // 퀴즈 시작 시간 기록 및 타이머 시작
+    startTime = new Date();
     startTimer();
 
     loadQuiz();
   });
+});
 
 // 난이도 텍스트 반환 함수
 function getDifficultyText(diff) {
