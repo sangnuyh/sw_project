@@ -49,6 +49,10 @@
   <audio id="bgmPlayer" src="{% static 'audio/bgm1.mp3' %}" autoplay loop></audio>
   <audio id="sfxPlayer" src="{% static 'audio/click.mp3' %}"></audio>
 
+  <div id="timer" style="position:absolute;top:10px;right:4rem;font-weight:bold;">
+    ⌛: <span id="timerValue">0</span>초
+  </div>
+
 
   <main>
     <!-- 카테고리 선택 화면 -->
@@ -72,6 +76,8 @@
 
 
         <button class="catBtn" id="userQuizzesBtn">다른 사용자 문제</button>
+
+        <button onclick="location.href='/quiz/ranking/'" class="catBtn">랭킹 보기</button>
       </section>
     </div>
 

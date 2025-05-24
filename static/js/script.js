@@ -4496,6 +4496,9 @@ let currentQuiz = 0;
 let score = 0;
 let currentCategory = '';
 let currentDifficulty = '';
+let startTime, endTime, duration;  // 퀴즈 시간 측정용
+let timerInterval;
+let elapsedTime = 0;
 
 const categoryContainer = document.getElementById('categoryContainer');
 const difficultyContainer = document.getElementById('difficultyContainer');
@@ -4533,6 +4536,10 @@ document.querySelectorAll('.difficultyBtn').forEach(btn => {
     );
     currentQuiz = 0;
     score = 0;
+
+    startTime = new Date();  // 퀴즈 시작 시간 기록
+    startTimer();
+
     loadQuiz();
   });
 });
@@ -4552,6 +4559,19 @@ function shuffleArray(array) {
     [array[i], array[j]] = [array[j], array[i]];
   }
   return array;
+}
+
+function startTimer() {
+  elapsedTime = 0;
+  document.getElementById('timerValue').innerText = '0';
+  timerInterval = setInterval(() => {
+    elapsedTime++;
+    document.getElementById('timerValue').innerText = elapsedTime;
+  }, 1000);
+}
+
+function stopTimer() {
+  clearInterval(timerInterval);
 }
 
 function loadQuiz() {
@@ -4605,9 +4625,25 @@ nextBtn.addEventListener('click', () => {
 function showFinalResult() {
   clearState();
   questionEl.innerText = "";
+
+  endTime = new Date();
+  stopTimer();
+  
+  duration = Math.floor((endTime - startTime) / 1000);  // 초 단위
+
   resultEl.innerText = `훌륭해요! ${categoryNames[currentCategory]} 퀴즈 (${getDifficultyText(currentDifficulty)}) 에서 총 ${currentQuizData.length}문제 중 ${score}문제를 맞추셨어요. \n 계속 도전해보세요!`;
   nextBtn.style.display = "none";
   menuBtn.style.display = "block";
+
+   // ✅ 랭킹 보기 버튼 생성 및 추가
+  const footer = document.querySelector('footer');
+  const rankingBtn = document.createElement('button');
+  rankingBtn.innerText = "랭킹 보기";
+  rankingBtn.className = 'actionBtn';
+  rankingBtn.addEventListener('click', () => {
+    window.location.href = `/quiz/ranking/?category=${currentCategory}&difficulty=${currentDifficulty}`;
+  });
+  footer.appendChild(rankingBtn);  // 퀴즈 하단에 버튼 표시
 
   // DB에 결과 저장
   const formData = new FormData();
@@ -4615,6 +4651,7 @@ function showFinalResult() {
   formData.append('difficulty', currentDifficulty);
   formData.append('score', score);
   formData.append('total', currentQuizData.length);
+  formData.append('duration', duration);
 
   fetch('/quiz/save_result/', {
     method: 'POST',
@@ -4666,3 +4703,4 @@ menuBtn.addEventListener('click', () => {
   categoryContainer.style.display = 'block';
   difficultyContainer.style.display = 'none';
 });
+

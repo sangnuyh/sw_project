@@ -3,6 +3,7 @@
 
 # quiz/views.py
 
+from django.db.models import Max, Min #점수가 같을 시 시간순으로 정렬렬
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
@@ -17,13 +18,15 @@ def save_quiz_result(request):
             difficulty = request.POST.get('difficulty')
             score = int(request.POST.get('score'))
             total = int(request.POST.get('total'))
+            duration = int(request.POST.get('duration'))
 
             quiz_result = QuizResult.objects.create(
                 user=request.user,
                 category=category,
                 difficulty=difficulty,
                 score=score,
-                total=total
+                total=total,
+                duration=duration
             )
 
             return JsonResponse({
@@ -154,3 +157,47 @@ def submit_answer(request):
         except Exception as e:
             return JsonResponse({'error': str(e)}, status=400)
     return JsonResponse({'error': '잘못된 요청입니다.'}, status=400)
+
+def index_view(request):
+    return render(request, 'accounts/index.html')
+
+
+@login_required
+def ranking_view(request):
+    category = request.GET.get('category', 'it')
+    difficulty = request.GET.get('difficulty', 'easy')
+
+    top_scores = (
+        QuizResult.objects
+        .filter(category=category, difficulty=difficulty)
+        .annotate(
+            best_score=Max('score'),
+            best_time=Min('duration')  # 같은 점수일 때 빠른 사람
+        )
+        .order_by('-best_score', 'best_time')[:10]
+    )
+
+    CATEGORY_DISPLAY = {
+    'it': 'IT',
+    'history': '역사',
+    'sports': '스포츠',
+    'commonSense': '상식',
+    'proverb': '속담',
+    'literature' : '문학',
+    'art' : '예술',
+    'economy' : '경제'
+    }
+
+    DIFFICULTY_DISPLAY = {
+    'easy': '이지',
+    'medium': '노말',
+    'hard': '하드'
+    }
+
+    return render(request, 'quiz/ranking.html', {
+    'top_scores': top_scores,
+    'category': category,
+    'difficulty': difficulty,
+    'category_name': CATEGORY_DISPLAY.get(category, category),
+    'difficulty_name': DIFFICULTY_DISPLAY.get(difficulty, difficulty)
+})
