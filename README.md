@@ -9,6 +9,7 @@ Django 기반의 카테고리별 퀴즈 시스템
 - 퀴즈 결과 저장 및 기록 확인
 - 사용자 설정 (BGM, 효과음)
 - 사용자 지정 문제 모드
+- 랭킹 + 문제 푸는 시간 계산
 
 ## 팀원
 | 이름 | 역할 |
@@ -25,3 +26,4 @@ cd sw_project
 pip install -r requirements.txt
 python manage.py migrate
 python manage.py runserver
+
