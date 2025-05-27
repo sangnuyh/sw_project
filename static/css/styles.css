@@ -1,6 +1,7 @@
 @font-face {
   font-family: 'BMJUA';
-  src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/BMJUA.woff') format('woff');
+  src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/BMJUA.woff')
+    format('woff');
   font-weight: normal;
   font-style: normal;
 }
@@ -13,22 +14,22 @@
   font-family: 'BMJUA';
 }
 
-a{
+a {
   color: inherit;
   text-decoration: none;
 }
 
-body{
-  background: linear-gradient(135deg, #74ebd5, #ACB6E5);
+body {
+  background: linear-gradient(to bottom, #5986f8, hsl(0, 0%, 96%));
   background-repeat: no-repeat;
   background-size: cover;
 }
 
-header{
+header {
   height: 0;
 }
 
-.loginDivPa{
+.loginDivPa {
   width: 10rem;
   display: flex;
   position: relative;
@@ -36,7 +37,7 @@ header{
   top: 1.3rem;
 }
 
-.loginDivCh{
+.loginDivCh {
   flex: 1 0 auto;
   margin-left: 1.8rem;
   border-radius: 10px;
@@ -61,11 +62,12 @@ main {
   padding: 2rem;
   border-radius: 10px;
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+  position: relative;
   text-align: center;
 }
 
 /* 제목 스타일 */
-.title{
+.title {
   font-size: 1rem;
   margin-bottom: 0.9rem;
   color: #333;
@@ -85,8 +87,8 @@ title p {
 }
 
 .catBtn {
+  background: #6388f6;
   flex: 1 1 calc(45% - 1rem);
-  background: #4CAF50;
   color: #fff;
   border: none;
   padding: 1rem;
@@ -97,7 +99,7 @@ title p {
 }
 
 .catBtn:hover {
-  background: #45a049;
+  background: #163696;
   transform: scale(1.03);
 }
 
@@ -110,7 +112,7 @@ title p {
 }
 
 .difficultyBtn {
-  background: #FF5722;
+  background: #6388f6;
   color: #fff;
   border: none;
   padding: 1rem 1.5rem;
@@ -121,7 +123,7 @@ title p {
 }
 
 .difficultyBtn:hover {
-  background: #E64A19;
+  background: #163696;
   transform: scale(1.03);
 }
 
@@ -153,19 +155,19 @@ title p {
   font-size: 1rem;
   border: none;
   border-radius: 6px;
-  background: #2196F3;
+  background: #a5bbed;
   color: #fff;
   cursor: pointer;
   transition-duration: 0.3s;
 }
 
 .optionBtn:hover {
-  background: #1976D2;
+  background: #6388f6;
   transform: translateY(-2px);
 }
 
 .optionBtn.selected {
-  background-color: #0d47a1;
+  background: #6388f6;
 }
 
 /* 하단 액션 버튼 스타일 */
@@ -185,22 +187,29 @@ footer {
 }
 
 #nextBtn {
-  background: #FF9800;
+  background: #6388f6;
   color: #fff;
 }
 
 #nextBtn:hover {
-  background: #F57C00;
+  background: #163696;
   transform: translateY(-2px);
 }
 
 #menuBtn {
-  background: #9C27B0;
+  background: #6388f6;
   color: #fff;
+  padding: 0.75rem;
+  font-size: 1rem;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-top: 0.5rem;
+  transition-duration: 0.3s;
 }
 
 #menuBtn:hover {
-  background: #7B1FA2;
+  background: #163696;
   transform: translateY(-2px);
 }
 
@@ -208,7 +217,7 @@ footer {
 .result {
   margin-top: 1rem;
   font-size: 1.1rem;
-  color: #E91E63;
+  color: #e91e63;
   min-height: 1.5rem;
 }
 
@@ -217,17 +226,17 @@ footer {
   title h1 {
     font-size: 1.5rem;
   }
-  
+
   .catBtn {
     padding: 0.75rem;
     font-size: 0.9rem;
   }
-  
+
   .optionBtn {
     padding: 0.65rem;
     font-size: 0.9rem;
   }
-  
+
   .actionBtn {
     padding: 0.65rem;
     font-size: 0.9rem;
