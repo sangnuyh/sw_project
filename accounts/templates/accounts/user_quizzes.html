@@ -1,788 +1,907 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="ko">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>다른 사용자 문제</title>
-    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}" />
     <style>
-        .create-btn {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            padding: 10px 20px;
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 16px;
-            transition: background-color 0.3s;
-        }
-        .create-btn:hover {
-            background-color: #45a049;
-        }
-        .container {
-            position: relative;
-        }
-        .create-quiz-container {
-            display: none;
-        }
-        .create-quiz-container.visible {
-            display: block;
-        }
-        .category-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 20px;
-            margin-top: 20px;
-        }
-        .category-btn {
-            padding: 15px;
-            border: 2px solid #4CAF50;
-            border-radius: 8px;
-            background: white;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-        .category-btn:hover, .category-btn.selected {
-            background: #4CAF50;
-            color: white;
-        }
-        .difficulty-options {
-            display: none;
-            margin-top: 20px;
-        }
-        .difficulty-options.visible {
-            display: block;
-        }
-        .difficulty-btn {
-            padding: 15px 30px;
-            margin: 10px;
-            border: 2px solid #4CAF50;
-            border-radius: 8px;
-            background: white;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-        .difficulty-btn:hover {
-            background: #4CAF50;
-            color: white;
-        }
-        .quiz-form {
-            display: none;
-            margin-top: 20px;
-            padding: 20px;
-            border: 2px solid #4CAF50;
-            border-radius: 8px;
-        }
-        .quiz-form.visible {
-            display: block;
-        }
-        .form-group {
-            margin-bottom: 20px;
-        }
-        .form-group label {
-            display: block;
-            margin-bottom: 5px;
-            font-weight: bold;
-        }
-        .form-group input[type="text"],
-        .form-group textarea {
-            width: 100%;
-            padding: 8px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            font-size: 16px;
-        }
-        .form-group textarea {
-            height: 100px;
-            resize: vertical;
-        }
-        .option-group {
-            margin-bottom: 10px;
-        }
-        .option-group input[type="text"] {
-            width: calc(100% - 30px);
-        }
-        .option-group input[type="radio"] {
-            margin-right: 10px;
-        }
-        .submit-btn {
-            padding: 10px 20px;
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 16px;
-            transition: background-color 0.3s;
-        }
-        .submit-btn:hover {
-            background-color: #45a049;
-        }
-        .add-option-btn {
-            padding: 5px 10px;
-            background-color: #666;
-            color: white;
-            border: none;
-            border-radius: 3px;
-            cursor: pointer;
-            margin-top: 10px;
-        }
-        .add-option-btn:hover {
-            background-color: #555;
-        }
-        .quiz-list {
-            margin-top: 20px;
-        }
-        
-        .quiz-item {
-            background: white;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            padding: 20px;
-            margin-bottom: 20px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        }
-        
-        .quiz-header {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 15px;
-            padding-bottom: 10px;
-            border-bottom: 1px solid #eee;
-        }
-        
-        .quiz-category {
-            background: #4CAF50;
-            color: white;
-            padding: 5px 10px;
-            border-radius: 4px;
-            font-size: 14px;
-        }
-        
-        .quiz-difficulty {
-            background: #2196F3;
-            color: white;
-            padding: 5px 10px;
-            border-radius: 4px;
-            font-size: 14px;
-        }
-        
-        .quiz-creator {
-            color: #666;
-            font-size: 14px;
-        }
-        
-        .quiz-content {
-            margin: 15px 0;
-        }
-        
-        .quiz-question {
-            font-size: 18px;
-            font-weight: bold;
-            margin-bottom: 15px;
-        }
-        
-        .quiz-options {
-            display: grid;
-            gap: 10px;
-        }
-        
-        .quiz-option {
-            padding: 10px;
-            background: #f5f5f5;
-            border-radius: 4px;
-            font-size: 16px;
-            margin-bottom: 5px;
-        }
-        
-        .quiz-option.correct {
-            display: none;  /* 정답 표시 숨기기 */
-        }
-        .quiz-footer {
-            color: #999;
-            font-size: 14px;
-            margin-top: 15px;
-        }
-        .no-quizzes {
-            text-align: center;
-            padding: 40px;
-            background: #f5f5f5;
-            border-radius: 8px;
-            color: #666;
-        }
-        .category-section {
-            margin-bottom: 40px;
-        }
-        .category-title {
-            font-size: 24px;
-            color: #333;
-            margin-bottom: 20px;
-            padding-bottom: 10px;
-            border-bottom: 2px solid #4CAF50;
-        }
-        .category-buttons {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            margin: 20px 0;
-            padding: 0 20px;
-        }
-        .category-filter-btn {
-            padding: 10px 20px;
-            border: 2px solid #4CAF50;
-            border-radius: 5px;
-            background: white;
-            color: #4CAF50;
-            cursor: pointer;
-            transition: all 0.3s;
-            font-size: 16px;
-        }
-        .category-filter-btn:hover {
-            background: #4CAF50;
-            color: white;
-        }
-        .category-filter-btn.active {
-            background: #4CAF50;
-            color: white;
-        }
-        .category-section {
-            display: none;
-        }
-        .category-section.active {
-            display: block;
-        }
+      .create-btn {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        padding: 10px 20px;
+        background-color: #2196f3;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+        transition: background-color 0.3s;
+      }
+      .create-btn:hover {
+        background-color: #2196f3;
+      }
+      .container {
+        position: relative;
+      }
+      .create-quiz-container {
+        display: none;
+      }
+      .create-quiz-container.visible {
+        display: block;
+      }
+      .category-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px;
+        margin-top: 20px;
+      }
+      .category-btn {
+        padding: 15px;
+        border: 2px solid #2196f3;
+        border-radius: 8px;
+        background: white;
+        cursor: pointer;
+        transition: all 0.3s;
+      }
+      .category-btn:hover,
+      .category-btn.selected {
+        background: #2196f3;
+        color: white;
+      }
+      .difficulty-options {
+        display: none;
+        margin-top: 20px;
+      }
+      .difficulty-options.visible {
+        display: block;
+      }
+      .difficulty-btn {
+        padding: 15px 30px;
+        margin: 10px;
+        border: 2px solid #2196f3;
+        border-radius: 8px;
+        background: white;
+        cursor: pointer;
+        transition: all 0.3s;
+      }
+      .difficulty-btn:hover {
+        background: #4caf50;
+        color: white;
+      }
+      .quiz-form {
+        display: none;
+        margin-top: 20px;
+        padding: 20px;
+        border: 2px solid #4caf50;
+        border-radius: 8px;
+      }
+      .quiz-form.visible {
+        display: block;
+      }
+      .form-group {
+        margin-bottom: 20px;
+      }
+      .form-group label {
+        display: block;
+        margin-bottom: 5px;
+        font-weight: bold;
+      }
+      .form-group input[type='text'],
+      .form-group textarea {
+        width: 100%;
+        padding: 8px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        font-size: 16px;
+      }
+      .form-group textarea {
+        height: 100px;
+        resize: vertical;
+      }
+      .option-group {
+        margin-bottom: 10px;
+      }
+      .option-group input[type='text'] {
+        width: calc(100% - 30px);
+      }
+      .option-group input[type='radio'] {
+        margin-right: 10px;
+      }
+      .submit-btn {
+        padding: 10px 20px;
+        background-color: #2196f3;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+        transition: background-color 0.3s;
+      }
+      .submit-btn:hover {
+        background-color: #45a049;
+      }
+      .add-option-btn {
+        padding: 5px 10px;
+        background-color: #666;
+        color: white;
+        border: none;
+        border-radius: 3px;
+        cursor: pointer;
+        margin-top: 10px;
+      }
+      .add-option-btn:hover {
+        background-color: #555;
+      }
+      .quiz-list {
+        margin-top: 20px;
+      }
 
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 1000;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0,0,0,0.5);
-        }
+      .quiz-item {
+        background: white;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        padding: 20px;
+        margin-bottom: 20px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
 
-        .modal-content {
-            background-color: #fefefe;
-            margin: 15% auto;
-            padding: 20px;
-            border: 1px solid #888;
-            width: 80%;
-            max-width: 600px;
-            border-radius: 8px;
-            position: relative;
-        }
+      .quiz-header {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 15px;
+        padding-bottom: 10px;
+        border-bottom: 1px solid #eee;
+      }
 
-        .close {
-            color: #aaa;
-            float: right;
-            font-size: 28px;
-            font-weight: bold;
-            cursor: pointer;
-        }
+      .quiz-category {
+        background: #2196f3;
+        color: white;
+        padding: 5px 10px;
+        border-radius: 4px;
+        font-size: 14px;
+      }
 
-        .close:hover {
-            color: black;
-        }
+      .quiz-difficulty {
+        background: #2196f3;
+        color: white;
+        padding: 5px 10px;
+        border-radius: 4px;
+        font-size: 14px;
+      }
 
-        .solve-btn {
-            padding: 8px 16px;
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
+      .quiz-creator {
+        color: #666;
+        font-size: 14px;
+      }
 
-        .solve-btn:hover {
-            background-color: #45a049;
-        }
+      .quiz-content {
+        margin: 15px 0;
+      }
 
-        .option-radio {
-            display: block;
-            margin: 10px 0;
-            padding: 10px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            cursor: pointer;
-            transition: all 0.3s;
-            background-color: white;
-            width: 100%;
-            text-align: left;
-            font-size: 16px;
-        }
+      .quiz-question {
+        font-size: 18px;
+        font-weight: bold;
+        margin-bottom: 15px;
+      }
 
-        .option-radio:hover {
-            background-color: #f5f5f5;
-        }
+      .quiz-options {
+        display: grid;
+        gap: 10px;
+      }
 
-        .option-radio.selected {
-            background-color: #e8f5e9;
-            border-color: #4CAF50;
-            color: #4CAF50;
-            font-weight: bold;
-        }
+      .quiz-option {
+        padding: 10px;
+        background: #f5f5f5;
+        border-radius: 4px;
+        font-size: 16px;
+        margin-bottom: 5px;
+      }
 
-        #quizResult {
-            text-align: center;
-            padding: 20px;
-        }
+      .quiz-option.correct {
+        display: none; /* 정답 표시 숨기기 */
+      }
+      .quiz-footer {
+        color: #999;
+        font-size: 14px;
+        margin-top: 15px;
+      }
+      .no-quizzes {
+        text-align: center;
+        padding: 40px;
+        background: #f5f5f5;
+        border-radius: 8px;
+        color: #666;
+      }
+      .category-section {
+        margin-bottom: 40px;
+      }
+      .category-title {
+        font-size: 24px;
+        color: #333;
+        margin-bottom: 20px;
+        padding-bottom: 10px;
+        border-bottom: 2px solid #4caf50;
+      }
+      .category-buttons {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin: 20px 0;
+        padding: 0 20px;
+      }
+      .category-filter-btn {
+        padding: 10px 20px;
+        border: 2px solid #4caf50;
+        border-radius: 5px;
+        background: white;
+        color: #4caf50;
+        cursor: pointer;
+        transition: all 0.3s;
+        font-size: 16px;
+      }
+      .category-filter-btn:hover {
+        background: #2196f3;
+        color: white;
+      }
+      .category-filter-btn.active {
+        background: #2196f3;
+        color: white;
+      }
+      .category-section {
+        display: none;
+      }
+      .category-section.active {
+        display: block;
+      }
 
-        #resultMessage {
-            font-size: 18px;
-            margin: 20px 0;
-        }
+      .modal {
+        display: none;
+        position: fixed;
+        z-index: 1000;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+      }
 
-        .correct-answer {
-            color: #4CAF50;
-            font-weight: bold;
-        }
+      .modal-content {
+        background-color: #fefefe;
+        margin: 15% auto;
+        padding: 20px;
+        border: 1px solid #888;
+        width: 80%;
+        max-width: 600px;
+        border-radius: 8px;
+        position: relative;
+      }
 
-        .wrong-answer {
-            color: #f44336;
-            font-weight: bold;
-        }
+      .close {
+        color: #aaa;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+        cursor: pointer;
+      }
 
-        .main-menu-btn {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            padding: 10px 20px;
-            background-color: #4CAF50;
-            color: white;
-            text-decoration: none;
-            border-radius: 5px;
-            z-index: 9999;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
-            pointer-events: auto;
-        }
-        
-        .main-menu-btn:hover {
-            background-color: #45a049;
-        }
+      .close:hover {
+        color: black;
+      }
+
+      .solve-btn {
+        padding: 8px 16px;
+        background-color: #2196f3;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+      }
+
+      .solve-btn:hover {
+        background-color: #2196f3;
+      }
+
+      .option-radio {
+        display: block;
+        margin: 10px 0;
+        padding: 10px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: all 0.3s;
+        background-color: white;
+        width: 100%;
+        text-align: left;
+        font-size: 16px;
+      }
+
+      .option-radio:hover {
+        background-color: #f5f5f5;
+      }
+
+      .option-radio.selected {
+        background-color: #e8f5e9;
+        border-color: #4caf50;
+        color: #4caf50;
+        font-weight: bold;
+      }
+
+      #quizResult {
+        text-align: center;
+        padding: 20px;
+      }
+
+      #resultMessage {
+        font-size: 18px;
+        margin: 20px 0;
+      }
+
+      .correct-answer {
+        color: #4caf50;
+        font-weight: bold;
+      }
+
+      .wrong-answer {
+        color: #f44336;
+        font-weight: bold;
+      }
+
+      .main-menu-btn {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        padding: 10px 20px;
+        background-color: #4caf50;
+        color: white;
+        text-decoration: none;
+        border-radius: 5px;
+        z-index: 9999;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        pointer-events: auto;
+      }
+
+      .main-menu-btn:hover {
+        background-color: #45a049;
+      }
     </style>
-</head>
-<body>
+  </head>
+  <body>
     <a href="http://localhost:8000" class="main-menu-btn">메인 메뉴</a>
     <header>
-        <div class="loginDivPa">
-            {% if request.user.is_authenticated %}
-                <div class="loginDivCh welcomeMsg">{{ request.user.username }}님 환영합니다!</div>
-                <a class="loginDivCh" href="{% url 'my_results' %}">내 기록 조회</a>
-                <div class="loginDivCh logout"><a href="{% url 'logout' %}">로그아웃</a></div>
-            {% else %}
-                <div class="loginDivCh login"><a href="{% url 'login' %}">로그인</a></div>
-                <div class="loginDivCh joinMember"><a href="{% url 'signup' %}">회원가입</a></div>
-            {% endif %}
+      <div class="loginDivPa">
+        {% if request.user.is_authenticated %}
+        <div class="loginDivCh welcomeMsg">
+          {{ request.user.username }}님 환영합니다!
         </div>
+        <a class="loginDivCh" href="{% url 'my_results' %}">내 기록 조회</a>
+        <div class="loginDivCh logout">
+          <a href="{% url 'logout' %}">로그아웃</a>
+        </div>
+        {% else %}
+        <div class="loginDivCh login">
+          <a href="{% url 'login' %}">로그인</a>
+        </div>
+        <div class="loginDivCh joinMember">
+          <a href="{% url 'signup' %}">회원가입</a>
+        </div>
+        {% endif %}
+      </div>
     </header>
 
     <main>
-        <!-- 기존 문제 목록 컨테이너 -->
-        <div class="container" id="quizListContainer">
-            <button class="create-btn" onclick="showCreateQuiz()">문제 만들기</button>
-            <div class="title">
-                <h1>다른 사용자 문제</h1>
-                <p>다른 사용자들이 만든 문제를 풀어보세요!</p>
-            </div>
-            <!-- 카테고리 버튼 -->
-            <div class="category-buttons">
-                <button class="category-filter-btn active" data-category="all">전체</button>
-                {% for category in quizzes_by_category.keys %}
-                <button class="category-filter-btn" data-category="{{ category }}">{{ category }}</button>
-                {% endfor %}
-            </div>
-            <!-- 문제 목록 표시 -->
-            <div class="quiz-list">
-                {% for category, quizzes in quizzes_by_category.items %}
-                <div class="category-section active" data-category="{{ category }}">
-                    <h2 class="category-title">{{ category }}</h2>
-                    {% for quiz in quizzes %}
-                    <div class="quiz-item">
-                        <div class="quiz-header">
-                            <span class="quiz-difficulty">{{ quiz.get_difficulty_display }}</span>
-                            <span class="quiz-creator">{{ quiz.creator.username }}님의 문제</span>
-                        </div>
-                        <div class="quiz-content">
-                            <p class="quiz-question">{{ quiz.question }}</p>
-                            <div class="quiz-options" style="display: none;">
-                                {% for option in quiz.options.all %}
-                                <div class="quiz-option">
-                                    {{ option.content }}
-                                </div>
-                                {% endfor %}
-                            </div>
-                        </div>
-                        <div class="quiz-footer">
-                            <button class="solve-btn" onclick="showQuizModal('{{ quiz.id }}')">문제 풀기</button>
-                        </div>
-                    </div>
-                    {% endfor %}
-                </div>
-                {% empty %}
-                <div class="no-quizzes">
-                    <p>아직 등록된 문제가 없습니다. 첫 번째 문제를 만들어보세요!</p>
-                </div>
-                {% endfor %}
-            </div>
+      <!-- 기존 문제 목록 컨테이너 -->
+      <div class="container" id="quizListContainer">
+        <button class="create-btn" onclick="showCreateQuiz()">
+          문제 만들기
+        </button>
+        <div class="title">
+          <h1>다른 사용자 문제</h1>
+          <p>다른 사용자들이 만든 문제를 풀어보세요!</p>
         </div>
+        <!-- 카테고리 버튼 -->
+        <div class="category-buttons">
+          <button class="category-filter-btn active" data-category="all">
+            전체
+          </button>
+          {% for category in quizzes_by_category.keys %}
+          <button class="category-filter-btn" data-category="{{ category }}">
+            {{ category }}
+          </button>
+          {% endfor %}
+        </div>
+        <!-- 문제 목록 표시 -->
+        <div class="quiz-list">
+          {% for category, quizzes in quizzes_by_category.items %}
+          <div class="category-section active" data-category="{{ category }}">
+            <h2 class="category-title">{{ category }}</h2>
+            {% for quiz in quizzes %}
+            <div class="quiz-item">
+              <div class="quiz-header">
+                <span class="quiz-difficulty"
+                  >{{ quiz.get_difficulty_display }}</span
+                >
+                <span class="quiz-creator"
+                  >{{ quiz.creator.username }}님의 문제</span
+                >
+              </div>
+              <div class="quiz-content">
+                <p class="quiz-question">{{ quiz.question }}</p>
+                <div class="quiz-options" style="display: none">
+                  {% for option in quiz.options.all %}
+                  <div class="quiz-option">{{ option.content }}</div>
+                  {% endfor %}
+                </div>
+              </div>
+              <div class="quiz-footer">
+                <button
+                  class="solve-btn"
+                  onclick="showQuizModal('{{ quiz.id }}')"
+                >
+                  문제 풀기
+                </button>
+              </div>
+            </div>
+            {% endfor %}
+          </div>
+          {% empty %}
+          <div class="no-quizzes">
+            <p>아직 등록된 문제가 없습니다. 첫 번째 문제를 만들어보세요!</p>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
 
-        <!-- 퀴즈 풀기 모달 -->
-        <div id="quizModal" class="modal">
-            <div class="modal-content">
-                <span class="close">&times;</span>
-                <div id="quizContent">
-                    <h2 id="modalQuestion"></h2>
-                    <div id="modalOptions"></div>
-                    <button id="submitAnswer" class="submit-btn">정답 제출</button>
-                </div>
-                <div id="quizResult" style="display: none;">
-                    <h3>결과</h3>
-                    <div id="resultMessage"></div>
-                    <div id="resultDetails" style="margin-top: 20px; text-align: left;">
-                        <p><strong>카테고리:</strong> <span id="resultCategory"></span></p>
-                        <p><strong>난이도:</strong> <span id="resultDifficulty"></span></p>
-                        <p><strong>문제:</strong> <span id="resultQuestion"></span></p>
-                        <p><strong>내 답변:</strong> <span id="userAnswer"></span></p>
-                        <p><strong>정답:</strong> <span id="correctAnswer"></span></p>
-                    </div>
-                    <button id="closeResult" class="submit-btn" style="margin-top: 20px;">닫기</button>
-                </div>
+      <!-- 퀴즈 풀기 모달 -->
+      <div id="quizModal" class="modal">
+        <div class="modal-content">
+          <span class="close">&times;</span>
+          <div id="quizContent">
+            <h2 id="modalQuestion"></h2>
+            <div id="modalOptions"></div>
+            <button id="submitAnswer" class="submit-btn">정답 제출</button>
+          </div>
+          <div id="quizResult" style="display: none">
+            <h3>결과</h3>
+            <div id="resultMessage"></div>
+            <div id="resultDetails" style="margin-top: 20px; text-align: left">
+              <p>
+                <strong>카테고리:</strong> <span id="resultCategory"></span>
+              </p>
+              <p>
+                <strong>난이도:</strong> <span id="resultDifficulty"></span>
+              </p>
+              <p><strong>문제:</strong> <span id="resultQuestion"></span></p>
+              <p><strong>내 답변:</strong> <span id="userAnswer"></span></p>
+              <p><strong>정답:</strong> <span id="correctAnswer"></span></p>
             </div>
+            <button
+              id="closeResult"
+              class="submit-btn"
+              style="margin-top: 20px"
+            >
+              닫기
+            </button>
+          </div>
         </div>
+      </div>
 
-        <!-- 문제 만들기 컨테이너 -->
-        <div class="container create-quiz-container" id="createQuizContainer">
-            <div class="title">
-                <h1>문제 만들기</h1>
-                <p>카테고리를 선택해주세요</p>
-            </div>
-            <div class="category-grid">
-                <button class="category-btn" data-category="it">IT</button>
-                <button class="category-btn" data-category="sports">스포츠</button>
-                <button class="category-btn" data-category="literature">문학</button>
-                <button class="category-btn" data-category="art">예술</button>
-                <button class="category-btn" data-category="economy">경제</button>
-                <button class="category-btn" data-category="proverb">속담/사자성어</button>
-                <button class="category-btn" data-category="history">역사</button>
-                <button class="category-btn" data-category="commonSense">상식</button>
-            </div>
-            <div class="difficulty-options" id="difficultyOptions" style="display: none;">
-                <h2>난이도를 선택해주세요</h2>
-                <button class="difficulty-btn" data-difficulty="easy">쉬움</button>
-                <button class="difficulty-btn" data-difficulty="medium">보통</button>
-                <button class="difficulty-btn" data-difficulty="hard">어려움</button>
-            </div>
-            <div class="quiz-form" id="quizForm" style="display: none;">
-                <h2>문제 입력</h2>
-                <form id="createQuizForm">
-                    <div class="form-group">
-                        <label for="question">문제</label>
-                        <textarea id="question" name="question" required></textarea>
-                    </div>
-                    <div id="optionsContainer">
-                        <div class="form-group">
-                            <label>보기</label>
-                            <div class="option-group">
-                                <input type="radio" name="correct_answer" value="0" required>
-                                <input type="text" name="options[]" placeholder="보기 1" required>
-                            </div>
-                            <div class="option-group">
-                                <input type="radio" name="correct_answer" value="1" required>
-                                <input type="text" name="options[]" placeholder="보기 2" required>
-                            </div>
-                            <div class="option-group">
-                                <input type="radio" name="correct_answer" value="2" required>
-                                <input type="text" name="options[]" placeholder="보기 3" required>
-                            </div>
-                            <div class="option-group">
-                                <input type="radio" name="correct_answer" value="3" required>
-                                <input type="text" name="options[]" placeholder="보기 4" required>
-                            </div>
-                        </div>
-                    </div>
-                    <button type="submit" class="submit-btn">문제 등록</button>
-                </form>
-            </div>
+      <!-- 문제 만들기 컨테이너 -->
+      <div class="container create-quiz-container" id="createQuizContainer">
+        <div class="title">
+          <h1>문제 만들기</h1>
+          <p>카테고리를 선택해주세요</p>
         </div>
+        <div class="category-grid">
+          <button class="category-btn" data-category="it">IT</button>
+          <button class="category-btn" data-category="sports">스포츠</button>
+          <button class="category-btn" data-category="literature">문학</button>
+          <button class="category-btn" data-category="art">예술</button>
+          <button class="category-btn" data-category="economy">경제</button>
+          <button class="category-btn" data-category="proverb">
+            속담/사자성어
+          </button>
+          <button class="category-btn" data-category="history">역사</button>
+          <button class="category-btn" data-category="commonSense">상식</button>
+        </div>
+        <div
+          class="difficulty-options"
+          id="difficultyOptions"
+          style="display: none"
+        >
+          <h2>난이도를 선택해주세요</h2>
+          <button class="difficulty-btn" data-difficulty="easy">쉬움</button>
+          <button class="difficulty-btn" data-difficulty="medium">보통</button>
+          <button class="difficulty-btn" data-difficulty="hard">어려움</button>
+        </div>
+        <div class="quiz-form" id="quizForm" style="display: none">
+          <h2>문제 입력</h2>
+          <form id="createQuizForm">
+            <div class="form-group">
+              <label for="question">문제</label>
+              <textarea id="question" name="question" required></textarea>
+            </div>
+            <div id="optionsContainer">
+              <div class="form-group">
+                <label>보기</label>
+                <div class="option-group">
+                  <input
+                    type="radio"
+                    name="correct_answer"
+                    value="0"
+                    required
+                  />
+                  <input
+                    type="text"
+                    name="options[]"
+                    placeholder="보기 1"
+                    required
+                  />
+                </div>
+                <div class="option-group">
+                  <input
+                    type="radio"
+                    name="correct_answer"
+                    value="1"
+                    required
+                  />
+                  <input
+                    type="text"
+                    name="options[]"
+                    placeholder="보기 2"
+                    required
+                  />
+                </div>
+                <div class="option-group">
+                  <input
+                    type="radio"
+                    name="correct_answer"
+                    value="2"
+                    required
+                  />
+                  <input
+                    type="text"
+                    name="options[]"
+                    placeholder="보기 3"
+                    required
+                  />
+                </div>
+                <div class="option-group">
+                  <input
+                    type="radio"
+                    name="correct_answer"
+                    value="3"
+                    required
+                  />
+                  <input
+                    type="text"
+                    name="options[]"
+                    placeholder="보기 4"
+                    required
+                  />
+                </div>
+              </div>
+            </div>
+            <button type="submit" class="submit-btn">문제 등록</button>
+          </form>
+        </div>
+      </div>
     </main>
 
     <script>
-        function showCreateQuiz() {
-            document.getElementById('quizListContainer').style.display = 'none';
-            document.getElementById('createQuizContainer').classList.add('visible');
-            // 초기화: 카테고리 그리드 표시, 난이도 옵션과 문제 입력 폼 숨김
-            document.querySelector('.category-grid').style.display = 'grid';
-            document.getElementById('difficultyOptions').style.display = 'none';
-            document.getElementById('quizForm').style.display = 'none';
-        }
-    
-        // 카테고리 버튼 클릭 이벤트
-        document.querySelectorAll('.category-btn').forEach(btn => {
-            btn.addEventListener('click', function() {
-                // 이전에 선택된 카테고리 버튼의 선택 상태 제거
-                document.querySelectorAll('.category-btn').forEach(b => b.classList.remove('selected'));
-                // 현재 버튼 선택 상태 추가
-                this.classList.add('selected');
-                
-                // 카테고리 그리드 숨기기
-                document.querySelector('.category-grid').style.display = 'none';
-                // 난이도 옵션 표시
-                document.getElementById('difficultyOptions').style.display = 'block';
-                // 제목 텍스트 변경
-                document.querySelector('.title p').textContent = '난이도를 선택해주세요';
+      function showCreateQuiz() {
+        document.getElementById('quizListContainer').style.display = 'none';
+        document.getElementById('createQuizContainer').classList.add('visible');
+        // 초기화: 카테고리 그리드 표시, 난이도 옵션과 문제 입력 폼 숨김
+        document.querySelector('.category-grid').style.display = 'grid';
+        document.getElementById('difficultyOptions').style.display = 'none';
+        document.getElementById('quizForm').style.display = 'none';
+      }
+
+      // 카테고리 버튼 클릭 이벤트
+      document.querySelectorAll('.category-btn').forEach((btn) => {
+        btn.addEventListener('click', function () {
+          // 이전에 선택된 카테고리 버튼의 선택 상태 제거
+          document
+            .querySelectorAll('.category-btn')
+            .forEach((b) => b.classList.remove('selected'));
+          // 현재 버튼 선택 상태 추가
+          this.classList.add('selected');
+
+          // 카테고리 그리드 숨기기
+          document.querySelector('.category-grid').style.display = 'none';
+          // 난이도 옵션 표시
+          document.getElementById('difficultyOptions').style.display = 'block';
+          // 제목 텍스트 변경
+          document.querySelector('.title p').textContent =
+            '난이도를 선택해주세요';
+        });
+      });
+
+      // 난이도 버튼 클릭 이벤트
+      document.querySelectorAll('.difficulty-btn').forEach((btn) => {
+        btn.addEventListener('click', function () {
+          const selectedCategory = document.querySelector(
+            '.category-btn.selected'
+          );
+          if (!selectedCategory) {
+            alert('카테고리를 먼저 선택해주세요!');
+            return;
+          }
+
+          // 이전에 선택된 난이도 버튼의 선택 상태 제거
+          document
+            .querySelectorAll('.difficulty-btn')
+            .forEach((b) => b.classList.remove('selected'));
+          // 현재 버튼 선택 상태 추가
+          this.classList.add('selected');
+
+          const category = selectedCategory.dataset.category;
+          const difficulty = this.dataset.difficulty;
+
+          // 난이도 옵션 숨기기
+          document.getElementById('difficultyOptions').style.display = 'none';
+          // 문제 입력 폼 표시
+          document.getElementById('quizForm').style.display = 'block';
+          // 제목 텍스트 변경
+          document.querySelector('.title p').textContent =
+            '문제를 입력해주세요';
+        });
+      });
+
+      // 문제 등록 폼 제출 이벤트
+      document
+        .getElementById('createQuizForm')
+        .addEventListener('submit', function (e) {
+          e.preventDefault();
+
+          const selectedCategory = document.querySelector(
+            '.category-btn.selected'
+          );
+          const selectedDifficulty = document.querySelector(
+            '.difficulty-btn.selected'
+          );
+          const question = document.getElementById('question').value;
+          const options = Array.from(
+            document.getElementsByName('options[]')
+          ).map((input) => input.value);
+          const correctAnswer = document.querySelector(
+            'input[name="correct_answer"]:checked'
+          ).value;
+
+          console.log('Selected category:', selectedCategory);
+          console.log('Selected difficulty:', selectedDifficulty);
+          console.log('Question:', question);
+          console.log('Options:', options);
+          console.log('Correct answer:', correctAnswer);
+
+          // 데이터 객체 생성
+          const quizData = {
+            category: selectedCategory.dataset.category,
+            difficulty: selectedDifficulty.dataset.difficulty,
+            question: question,
+            options: options,
+            correctAnswer: correctAnswer,
+          };
+
+          console.log('Quiz data to send:', quizData);
+
+          // 서버로 데이터 전송
+          fetch('{% url "create_user_quiz" %}', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'X-CSRFToken': getCookie('csrftoken'),
+            },
+            body: JSON.stringify(quizData),
+          })
+            .then((response) => {
+              console.log('Response status:', response.status);
+              return response.json();
+            })
+            .then((data) => {
+              console.log('Response data:', data);
+              if (data.status === 'success') {
+                alert(data.message);
+                // 폼 초기화
+                this.reset();
+                // 모든 컨테이너 초기화
+                document.getElementById('quizForm').style.display = 'none';
+                document.getElementById('difficultyOptions').style.display =
+                  'none';
+                document.querySelector('.category-grid').style.display = 'grid';
+                // 문제 만들기 컨테이너 숨기기
+                document
+                  .getElementById('createQuizContainer')
+                  .classList.remove('visible');
+                document.getElementById('createQuizContainer').style.display =
+                  'none';
+                // 문제 목록 컨테이너 표시
+                document.getElementById('quizListContainer').style.display =
+                  'block';
+                // 페이지 새로고침하여 새로운 문제 표시
+                window.location.href = window.location.href;
+              } else {
+                alert('오류가 발생했습니다: ' + data.message);
+              }
+            })
+            .catch((error) => {
+              console.error('Error:', error);
+              alert('문제 등록 중 오류가 발생했습니다.');
             });
         });
-    
-        // 난이도 버튼 클릭 이벤트
-        document.querySelectorAll('.difficulty-btn').forEach(btn => {
-            btn.addEventListener('click', function() {
-                const selectedCategory = document.querySelector('.category-btn.selected');
-                if (!selectedCategory) {
-                    alert('카테고리를 먼저 선택해주세요!');
-                    return;
-                }
-                
-                // 이전에 선택된 난이도 버튼의 선택 상태 제거
-                document.querySelectorAll('.difficulty-btn').forEach(b => b.classList.remove('selected'));
-                // 현재 버튼 선택 상태 추가
-                this.classList.add('selected');
-                
-                const category = selectedCategory.dataset.category;
-                const difficulty = this.dataset.difficulty;
-                
-                // 난이도 옵션 숨기기
-                document.getElementById('difficultyOptions').style.display = 'none';
-                // 문제 입력 폼 표시
-                document.getElementById('quizForm').style.display = 'block';
-                // 제목 텍스트 변경
-                document.querySelector('.title p').textContent = '문제를 입력해주세요';
-            });
-        });
 
-        // 문제 등록 폼 제출 이벤트
-        document.getElementById('createQuizForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            const selectedCategory = document.querySelector('.category-btn.selected');
-            const selectedDifficulty = document.querySelector('.difficulty-btn.selected');
-            const question = document.getElementById('question').value;
-            const options = Array.from(document.getElementsByName('options[]')).map(input => input.value);
-            const correctAnswer = document.querySelector('input[name="correct_answer"]:checked').value;
-
-            console.log('Selected category:', selectedCategory);
-            console.log('Selected difficulty:', selectedDifficulty);
-            console.log('Question:', question);
-            console.log('Options:', options);
-            console.log('Correct answer:', correctAnswer);
-
-            // 데이터 객체 생성
-            const quizData = {
-                category: selectedCategory.dataset.category,
-                difficulty: selectedDifficulty.dataset.difficulty,
-                question: question,
-                options: options,
-                correctAnswer: correctAnswer
-            };
-
-            console.log('Quiz data to send:', quizData);
-
-            // 서버로 데이터 전송
-            fetch('{% url "create_user_quiz" %}', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'X-CSRFToken': getCookie('csrftoken')
-                },
-                body: JSON.stringify(quizData)
-            })
-            .then(response => {
-                console.log('Response status:', response.status);
-                return response.json();
-            })
-            .then(data => {
-                console.log('Response data:', data);
-                if (data.status === 'success') {
-                    alert(data.message);
-                    // 폼 초기화
-                    this.reset();
-                    // 모든 컨테이너 초기화
-                    document.getElementById('quizForm').style.display = 'none';
-                    document.getElementById('difficultyOptions').style.display = 'none';
-                    document.querySelector('.category-grid').style.display = 'grid';
-                    // 문제 만들기 컨테이너 숨기기
-                    document.getElementById('createQuizContainer').classList.remove('visible');
-                    document.getElementById('createQuizContainer').style.display = 'none';
-                    // 문제 목록 컨테이너 표시
-                    document.getElementById('quizListContainer').style.display = 'block';
-                    // 페이지 새로고침하여 새로운 문제 표시
-                    window.location.href = window.location.href;
-                } else {
-                    alert('오류가 발생했습니다: ' + data.message);
-                }
-            })
-            .catch(error => {
-                console.error('Error:', error);
-                alert('문제 등록 중 오류가 발생했습니다.');
-            });
-        });
-
-        // CSRF 토큰 가져오기
-        function getCookie(name) {
-            let cookieValue = null;
-            if (document.cookie && document.cookie !== '') {
-                const cookies = document.cookie.split(';');
-                for (let i = 0; i < cookies.length; i++) {
-                    const cookie = cookies[i].trim();
-                    if (cookie.substring(0, name.length + 1) === (name + '=')) {
-                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-                        break;
-                    }
-                }
+      // CSRF 토큰 가져오기
+      function getCookie(name) {
+        let cookieValue = null;
+        if (document.cookie && document.cookie !== '') {
+          const cookies = document.cookie.split(';');
+          for (let i = 0; i < cookies.length; i++) {
+            const cookie = cookies[i].trim();
+            if (cookie.substring(0, name.length + 1) === name + '=') {
+              cookieValue = decodeURIComponent(
+                cookie.substring(name.length + 1)
+              );
+              break;
             }
-            return cookieValue;
+          }
         }
+        return cookieValue;
+      }
 
-        // 카테고리 필터 버튼 클릭 이벤트
-        document.querySelectorAll('.category-filter-btn').forEach(btn => {
-            btn.addEventListener('click', function() {
-                // 모든 버튼에서 active 클래스 제거
-                document.querySelectorAll('.category-filter-btn').forEach(b => b.classList.remove('active'));
-                // 클릭된 버튼에 active 클래스 추가
-                this.classList.add('active');
-                
-                const selectedCategory = this.dataset.category;
-                
-                // 모든 카테고리 섹션 숨기기
-                document.querySelectorAll('.category-section').forEach(section => {
-                    section.classList.remove('active');
-                });
-                
-                if (selectedCategory === 'all') {
-                    // 전체 보기 선택 시 모든 섹션 표시
-                    document.querySelectorAll('.category-section').forEach(section => {
-                        section.classList.add('active');
-                    });
-                } else {
-                    // 선택된 카테고리의 섹션만 표시
-                    document.querySelectorAll(`.category-section[data-category="${selectedCategory}"]`).forEach(section => {
-                        section.classList.add('active');
-                    });
-                }
-            });
-        });
+      // 카테고리 필터 버튼 클릭 이벤트
+      document.querySelectorAll('.category-filter-btn').forEach((btn) => {
+        btn.addEventListener('click', function () {
+          // 모든 버튼에서 active 클래스 제거
+          document
+            .querySelectorAll('.category-filter-btn')
+            .forEach((b) => b.classList.remove('active'));
+          // 클릭된 버튼에 active 클래스 추가
+          this.classList.add('active');
 
-        // 퀴즈 모달 관련 함수들
-        const modal = document.getElementById('quizModal');
-        const closeBtn = document.getElementsByClassName('close')[0];
-        const quizContent = document.getElementById('quizContent');
-        const quizResult = document.getElementById('quizResult');
-        const resultMessage = document.getElementById('resultMessage');
-        const closeResultBtn = document.getElementById('closeResult');
-        let currentQuizId = null;
+          const selectedCategory = this.dataset.category;
 
-        function showQuizModal(quizId) {
-            currentQuizId = quizId;
-            modal.style.display = 'block';
-            quizContent.style.display = 'block';
-            quizResult.style.display = 'none';
-            
-            // 퀴즈 데이터 가져오기
-            fetch(`/quiz/get_quiz/${quizId}/`)
-                .then(response => response.json())
-                .then(data => {
-                    document.getElementById('modalQuestion').textContent = data.question;
-                    document.getElementById('resultCategory').textContent = data.category;
-                    document.getElementById('resultDifficulty').textContent = data.difficulty;
-                    const optionsContainer = document.getElementById('modalOptions');
-                    optionsContainer.innerHTML = '';
-                    
-                    data.options.forEach((option, index) => {
-                        const optionDiv = document.createElement('button');
-                        optionDiv.className = 'option-radio';
-                        optionDiv.textContent = option.content;
-                        optionDiv.dataset.index = index;
-                        
-                        optionDiv.onclick = function() {
-                            // 이전에 선택된 옵션의 선택 상태 제거
-                            document.querySelectorAll('.option-radio').forEach(btn => {
-                                btn.classList.remove('selected');
-                            });
-                            // 현재 옵션 선택 상태 추가
-                            this.classList.add('selected');
-                        };
-                        
-                        optionsContainer.appendChild(optionDiv);
-                    });
-                });
-        }
+          // 모든 카테고리 섹션 숨기기
+          document.querySelectorAll('.category-section').forEach((section) => {
+            section.classList.remove('active');
+          });
 
-        closeBtn.onclick = function() {
-            modal.style.display = 'none';
-        }
-
-        window.onclick = function(event) {
-            if (event.target == modal) {
-                modal.style.display = 'none';
-            }
-        }
-
-        document.getElementById('submitAnswer').onclick = function() {
-            const selectedOption = document.querySelector('.option-radio.selected');
-            if (!selectedOption) {
-                alert('답을 선택해주세요!');
-                return;
-            }
-
-            fetch('/quiz/submit_answer/', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'X-CSRFToken': getCookie('csrftoken')
-                },
-                body: JSON.stringify({
-                    quiz_id: currentQuizId,
-                    answer: selectedOption.dataset.index
-                })
-            })
-            .then(response => response.json())
-            .then(data => {
-                quizContent.style.display = 'none';
-                quizResult.style.display = 'block';
-                
-                // 문제 내용 표시
-                document.getElementById('resultQuestion').textContent = document.getElementById('modalQuestion').textContent;
-                
-                // 사용자의 답변 표시
-                document.getElementById('userAnswer').textContent = selectedOption.textContent;
-                
-                // 정답 표시
-                document.getElementById('correctAnswer').textContent = data.correct_answer;
-                
-                if (data.correct) {
-                    resultMessage.innerHTML = '<span class="correct-answer">정답입니다! 🎉</span>';
-                } else {
-                    resultMessage.innerHTML = '<span class="wrong-answer">틀렸습니다 😢</span>';
-                }
-            });
-        }
-
-        closeResultBtn.onclick = function() {
-            modal.style.display = 'none';
-        }
-
-        // 페이지 로드 시 모든 카테고리 섹션 표시
-        document.addEventListener('DOMContentLoaded', function() {
-            document.querySelectorAll('.category-section').forEach(section => {
+          if (selectedCategory === 'all') {
+            // 전체 보기 선택 시 모든 섹션 표시
+            document
+              .querySelectorAll('.category-section')
+              .forEach((section) => {
                 section.classList.add('active');
-            });
+              });
+          } else {
+            // 선택된 카테고리의 섹션만 표시
+            document
+              .querySelectorAll(
+                `.category-section[data-category="${selectedCategory}"]`
+              )
+              .forEach((section) => {
+                section.classList.add('active');
+              });
+          }
         });
+      });
+
+      // 퀴즈 모달 관련 함수들
+      const modal = document.getElementById('quizModal');
+      const closeBtn = document.getElementsByClassName('close')[0];
+      const quizContent = document.getElementById('quizContent');
+      const quizResult = document.getElementById('quizResult');
+      const resultMessage = document.getElementById('resultMessage');
+      const closeResultBtn = document.getElementById('closeResult');
+      let currentQuizId = null;
+
+      function showQuizModal(quizId) {
+        currentQuizId = quizId;
+        modal.style.display = 'block';
+        quizContent.style.display = 'block';
+        quizResult.style.display = 'none';
+
+        // 퀴즈 데이터 가져오기
+        fetch(`/quiz/get_quiz/${quizId}/`)
+          .then((response) => response.json())
+          .then((data) => {
+            document.getElementById('modalQuestion').textContent =
+              data.question;
+            document.getElementById('resultCategory').textContent =
+              data.category;
+            document.getElementById('resultDifficulty').textContent =
+              data.difficulty;
+            const optionsContainer = document.getElementById('modalOptions');
+            optionsContainer.innerHTML = '';
+
+            data.options.forEach((option, index) => {
+              const optionDiv = document.createElement('button');
+              optionDiv.className = 'option-radio';
+              optionDiv.textContent = option.content;
+              optionDiv.dataset.index = index;
+
+              optionDiv.onclick = function () {
+                // 이전에 선택된 옵션의 선택 상태 제거
+                document.querySelectorAll('.option-radio').forEach((btn) => {
+                  btn.classList.remove('selected');
+                });
+                // 현재 옵션 선택 상태 추가
+                this.classList.add('selected');
+              };
+
+              optionsContainer.appendChild(optionDiv);
+            });
+          });
+      }
+
+      closeBtn.onclick = function () {
+        modal.style.display = 'none';
+      };
+
+      window.onclick = function (event) {
+        if (event.target == modal) {
+          modal.style.display = 'none';
+        }
+      };
+
+      document.getElementById('submitAnswer').onclick = function () {
+        const selectedOption = document.querySelector('.option-radio.selected');
+        if (!selectedOption) {
+          alert('답을 선택해주세요!');
+          return;
+        }
+
+        fetch('/quiz/submit_answer/', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'X-CSRFToken': getCookie('csrftoken'),
+          },
+          body: JSON.stringify({
+            quiz_id: currentQuizId,
+            answer: selectedOption.dataset.index,
+          }),
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            quizContent.style.display = 'none';
+            quizResult.style.display = 'block';
+
+            // 문제 내용 표시
+            document.getElementById('resultQuestion').textContent =
+              document.getElementById('modalQuestion').textContent;
+
+            // 사용자의 답변 표시
+            document.getElementById('userAnswer').textContent =
+              selectedOption.textContent;
+
+            // 정답 표시
+            document.getElementById('correctAnswer').textContent =
+              data.correct_answer;
+
+            if (data.correct) {
+              resultMessage.innerHTML =
+                '<span class="correct-answer">정답입니다! 🎉</span>';
+            } else {
+              resultMessage.innerHTML =
+                '<span class="wrong-answer">틀렸습니다 😢</span>';
+            }
+          });
+      };
+
+      closeResultBtn.onclick = function () {
+        modal.style.display = 'none';
+      };
+
+      // 페이지 로드 시 모든 카테고리 섹션 표시
+      document.addEventListener('DOMContentLoaded', function () {
+        document.querySelectorAll('.category-section').forEach((section) => {
+          section.classList.add('active');
+        });
+      });
     </script>
-</body>
-</html> 
+  </body>
+</html>
