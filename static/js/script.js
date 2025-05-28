@@ -6235,17 +6235,11 @@ function shuffleArray(array) {
 }
 
 function startTimer() {
-  elapsedTime = 30;
-  document.getElementById('timerValue').innerText = '30';
+  elapsedTime = 0;
+  document.getElementById('timerValue').innerText = '0';
   timerInterval = setInterval(() => {
-    elapsedTime--;
-    if (elapsedTime === 0) {
-      document.getElementById('timerValue').innerText = 0;
-      stopTimer();
-      showFinalResult();
-    } else {
-      document.getElementById('timerValue').innerText = elapsedTime;
-    }
+    elapsedTime++;
+    document.getElementById('timerValue').innerText = elapsedTime;
   }, 1000);
 }
 
@@ -6355,14 +6349,21 @@ function showFinalResult() {
 
   nextBtn.style.display = 'none';
   menuBtn.style.display = 'block';
+  // ✅ 타이머 초기화
+  elapsedTime = 0;
+  document.getElementById('timerValue').innerText = '0';
 
   // ✅ 랭킹 보기 버튼 생성 및 추가
   const footer = document.querySelector('footer');
   const rankingBtn = document.createElement('button');
   rankingBtn.innerText = '랭킹 보기';
   rankingBtn.className = 'actionBtn';
-  rankingBtn.id = 'rankingBtn'; // id를 지정해서 나중에 버그로 버튼이 게속 만들어 지는것을 방지합니다
   rankingBtn.addEventListener('click', () => {
+    // ✅ 타이머 초기화
+    elapsedTime = 0;
+    document.getElementById('timerValue').innerText = '0';
+    stopTimer();
+
     window.location.href = `/quiz/ranking/?category=${currentCategory}&difficulty=${currentDifficulty}`;
   });
   finalEl.innerText = `훌륭해요! 
@@ -6457,23 +6458,21 @@ menuBtn.addEventListener('click', () => {
   currentQuiz = 0;
   score = 0;
 
+  // 타이머 초기화
+  stopTimer();
+  elapsedTime = 0;
+  document.getElementById('timerValue').innerText = '0';
+
   // 퀴즈 컨테이너 숨기기
   quizContainer.style.display = 'none';
-  resultContainer.style.display = 'none';
-
-  // 메뉴 버튼 원래대로 바꾸기
-  menuBtn.innerText = '<';
-  menuBtn.className = null;
 
   // 카테고리 선택 화면 표시
   categoryContainer.style.display = 'block';
   difficultyContainer.style.display = 'none';
-
-  // 랭킹 버튼 다시 지우기
-  document.getElementById('rankingBtn').remove();
 });
 
 difficultymeunBtn.addEventListener('click', () => {
+  s;
   // 퀴즈 컨테이너 숨기기
   quizContainer.style.display = 'none';
 

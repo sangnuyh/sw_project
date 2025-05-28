@@ -86,19 +86,13 @@
     </style>
   </head>
   <body>
-    <a href="http://localhost:8000" class="main-menu-btn">메인 메뉴</a>
+    <a href="http://localhost:8000" class="main-menu-btn">🏠︎</a>
     <div class="container">
       <h2 style="color: #6388f6">회원가입</h2>
       <form method="post">
-        <p>아이디</p>
-        <input id="username" />
-        <p>비밀번호</p>
-        <input id="password1" type="password" />
-        <p>비밀번호 확인</p>
-        <input id="password2" type="password" />
-        <button type="submit" style="background-color: #6388f6">
-          가입하기
-        </button>
+        {% csrf_token %} {{form.as_p}}
+
+        <button type="submit">가입하기</button>
       </form>
     </div>
   </body>
