@@ -1,133 +1,135 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="ko">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>내 기록 조회</title>
     <style>
-      body {
-        font-family: Arial, sans-serif;
-        margin: 0;
-        padding: 20px;
-        background-color: #f5f5f5;
-      }
-      .container {
-        max-width: 800px;
-        margin: 0 auto;
-        padding: 20px;
-      }
-      h1 {
-        text-align: center;
-        color: #333;
-        margin-bottom: 30px;
-      }
-      .result-item {
-        background: white;
-        border-radius: 8px;
-        padding: 20px;
-        margin-bottom: 20px;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-      }
-      .result-header {
-        display: flex;
-        justify-content: space-between;
-        margin-bottom: 15px;
-        padding-bottom: 10px;
-        border-bottom: 1px solid #eee;
-      }
-      .result-category {
-        background: #2196f3;
-        color: white;
-        padding: 5px 10px;
-        border-radius: 4px;
-        font-size: 14px;
-      }
-      .result-difficulty {
-        background: #2196f3;
-        color: white;
-        padding: 5px 10px;
-        border-radius: 4px;
-        font-size: 14px;
-      }
-      .result-date {
-        color: #666;
-        font-size: 14px;
-      }
-      .result-content {
-        margin: 15px 0;
-      }
-      .result-question {
-        font-size: 18px;
-        font-weight: bold;
-        margin-bottom: 15px;
-      }
-      .result-answer {
-        margin: 10px 0;
-        padding: 10px;
-        background: #f5f5f5;
-        border-radius: 4px;
-      }
-      .result-score {
-        font-size: 16px;
-        font-weight: bold;
-        margin-top: 10px;
-      }
-      .correct {
-        color: #4caf50;
-      }
-      .incorrect {
-        color: #f44336;
-      }
-      .main-menu-btn {
-        position: fixed;
-        top: 20px;
-        right: 20px;
-        padding: 10px 20px;
-        background-color: #4caf50;
-        color: white;
-        text-decoration: none;
-        border-radius: 5px;
-        z-index: 9999;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-        pointer-events: auto;
-      }
-      .main-menu-btn:hover {
-        background-color: #45a049;
-      }
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 30px;
+        }
+        .result-item {
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .result-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #eee;
+        }
+        .result-category {
+            background: #4CAF50;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+        .result-difficulty {
+            background: #2196F3;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+        .result-date {
+            color: #666;
+            font-size: 14px;
+        }
+        .result-content {
+            margin: 15px 0;
+        }
+        .result-question {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+        .result-answer {
+            margin: 10px 0;
+            padding: 10px;
+            background: #f5f5f5;
+            border-radius: 4px;
+        }
+        .result-score {
+            font-size: 16px;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+        .correct {
+            color: #4CAF50;
+        }
+        .incorrect {
+            color: #f44336;
+        }
+        .main-menu-btn {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            z-index: 9999;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+            pointer-events: auto;
+        }
+        .main-menu-btn:hover {
+            background-color: #45a049;
+        }
     </style>
-  </head>
-  <body>
+</head>
+<body>
     <a href="http://localhost:8000" class="main-menu-btn">메인 메뉴</a>
     <div class="container">
-      <h1>내 기록 조회</h1>
-      {% for result in results %}
-      <div class="result-item">
-        <div class="result-header">
-          <span class="result-category">{{ result.category }}</span>
-          <span class="result-difficulty">{{ result.difficulty }}</span>
-          <span class="result-date"
-            >{{ result.played_at|date:"Y-m-d H:i" }}</span
-          >
+        <h1>내 기록 조회</h1>
+        {% for result in results %}
+        <div class="result-item">
+            <div class="result-header">
+                <span class="result-category">{{ result.category }}</span>
+                <span class="result-difficulty">{{ result.difficulty }}</span>
+                <span class="result-date">{{ result.played_at|date:"Y-m-d H:i" }}</span>
+            </div>
+            <div class="result-content">
+                <div class="result-question">{{ result.question }}</div>
+                <div class="result-answer">
+                    <strong>내 답변:</strong> {{ result.user_answer }}
+                </div>
+                <div class="result-answer">
+                    <strong>정답:</strong> {{ result.correct_answer }}
+                </div>
+                <div class="result-score {% if result.score > 0 %}correct{% else %}incorrect{% endif %}">
+                    {% if result.score > 0 %}
+                        정답입니다! 🎉
+                    {% else %}
+                        틀렸습니다 😢
+                    {% endif %}
+                </div>
+            </div>
         </div>
-        <div class="result-content">
-          <div class="result-question">{{ result.question }}</div>
-          <div class="result-answer">
-            <strong>내 답변:</strong> {{ result.user_answer }}
-          </div>
-          <div class="result-answer">
-            <strong>정답:</strong> {{ result.correct_answer }}
-          </div>
-          <div class="result-score {% if result.score > 0 %}correct{% else %}incorrect{% endif %}">
-            {% if result.score > 0 %}정답입니다! 🎉{% else %}틀렸습니다 😢{% endif %}
-          </div>
+        {% empty %}
+        <div class="result-item">
+            <p style="text-align: center;">아직 푼 문제가 없습니다.</p>
         </div>
-      </div>
-      {% empty %}
-      <div class="result-item">
-        <p style="text-align: center">아직 푼 문제가 없습니다.</p>
-      </div>
-      {% endfor %}
+        {% endfor %}
     </div>
-  </body>
+</body>
 </html>
