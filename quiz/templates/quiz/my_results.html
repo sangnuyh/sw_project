@@ -106,9 +106,7 @@
         <div class="result-header">
           <span class="result-category">{{ result.category }}</span>
           <span class="result-difficulty">{{ result.difficulty }}</span>
-          <span class="result-date"
-            >{{ result.played_at|date:"Y-m-d H:i" }}</span
-          >
+          <span class="result-date">{{ result.played_at|date:"Y-m-d H:i" }}</span>
         </div>
         <div class="result-content">
           <div class="result-question">{{ result.question }}</div>
@@ -118,11 +116,8 @@
           <div class="result-answer">
             <strong>정답:</strong> {{ result.correct_answer }}
           </div>
-          <div
-            class="result-score {% if result.score > 0 %}correct{% else %}incorrect{% endif %}"
-          >
-            {% if result.score > 0 %} 정답입니다! 🎉 {% else %} 틀렸습니다 😢 {%
-            endif %}
+          <div class="result-score {% if result.score > 0 %}correct{% else %}incorrect{% endif %}">
+            {% if result.score > 0 %} 정답입니다! 🎉 {% else %} 틀렸습니다 😢 {% endif %}
           </div>
         </div>
       </div>
