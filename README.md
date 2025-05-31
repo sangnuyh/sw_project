@@ -26,4 +26,5 @@ cd sw_project
 pip install -r requirements.txt
 python manage.py migrate
 python manage.py runserver
-
+```
+개발자 가이드와 사용자 가이드는 docs 파일에 있습니다
