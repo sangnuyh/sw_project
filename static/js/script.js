@@ -6472,7 +6472,6 @@ menuBtn.addEventListener('click', () => {
 });
 
 difficultymeunBtn.addEventListener('click', () => {
-  s;
   // 퀴즈 컨테이너 숨기기
   quizContainer.style.display = 'none';
 
