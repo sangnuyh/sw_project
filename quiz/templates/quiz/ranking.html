@@ -9,8 +9,10 @@
     h1 { text-align: center; }
     table { width: 100%; max-width: 600px; margin: 0 auto; border-collapse: collapse; }
     th, td { padding: 10px; text-align: center; border: 1px solid #ccc; }
-    th { background: #4CAF50; color: white; }
+    th { background: #6388f6; color: white; }
     tr:nth-child(even) { background: #f9f9f9; }
+    select { background: #6388f6;color: #fff;padding: 0.25rem;font-size: 1rem;border: none;border-radius: 6px;cursor: pointer;margin-top: 0.5rem;transition-duration: 0.3s; }
+    button { background: #6388f6;color: #fff;padding: 0.25rem;font-size: 1rem;border: none;border-radius: 6px;cursor: pointer;margin-top: 0.5rem;transition-duration: 0.3s;}
   </style>
 </head>
 <body>
@@ -39,8 +41,8 @@
     <tr>
       <th>순위</th>
       <th>사용자</th>
-      <th>최고 점수</th>
-      <th>걸린 시간 (초)</th>
+      <th style="background-color: #89a2f4">최고 점수</th>
+      <th style="background-color: #89a2f4">걸린 시간 (초)</th>
 
     </tr>
     {% for user in top_scores %}
@@ -60,4 +62,3 @@
 </div>
 </body>
 </html>
-
